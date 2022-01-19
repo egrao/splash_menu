@@ -1,6 +1,7 @@
 package com.example.splash;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -25,9 +26,13 @@ public class MainActivity extends AppCompatActivity {
         Animation spinin = AnimationUtils.loadAnimation(this, R.anim.custom_anim);
         LayoutAnimationController controller =
                 new LayoutAnimationController(spinin);
+
         TableLayout table = (TableLayout) findViewById(R.id.TableLayout01);
         TableRow row = (TableRow) table.getChildAt(0);
         row.setLayoutAnimation(controller);
+
+        MediaPlayer audio = MediaPlayer.create(MainActivity.this, R.raw.ohbanana);
+        audio.start();
 //        for (int i = 0; i < table.getChildCount(); i++) {
 //            TableRow row = (TableRow) table.getChildAt(i);
 //            row.setLayoutAnimation(controller);
@@ -45,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-//                startActivity(new Intent(MainActivity.this,Menu.class));
-//                MainActivity.this.finish();
+                startActivity(new Intent(MainActivity.this,Menu.class));
+                MainActivity.this.finish();
             }
 
             @Override

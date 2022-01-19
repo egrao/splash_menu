@@ -12,10 +12,12 @@
         <activity
             android:name=".game2048"
             android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             />
         <activity
             android:name=".Menu"
             android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             />
         <activity
             android:name=".MainActivity"

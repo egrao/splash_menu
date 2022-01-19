@@ -14,16 +14,16 @@
 
         <TableRow
             android:id="@+id/TableRow01"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="85">
 
             <pl.droidsonroids.gif.GifImageView
                 android:layout_width="143dp"
                 android:layout_height="500dp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:src="@drawable/bananagif"
-                />
+                android:src="@drawable/bananagif" />
 
         </TableRow>
 
@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="15"
             android:gravity="top|center"
             android:text="@string/app_logo_top"
             android:textColor="@color/logo_color"
