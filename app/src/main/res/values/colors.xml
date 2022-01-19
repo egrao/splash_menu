@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="logo_color">#FFFF0F</color>
+    <color name="version_color">#f0f0f0</color>
+    <color name="version_bkgrd">#1a1a48</color>
+    <color name="black">#000000</color>
+    <color name="purple_200">#AE87BF</color>
+    <color name="purple_500">#A600EF</color>
+    <color name="purple_700">#6868CF</color>
+    <color name="teal_200">#2EFBB8</color>
+</resources>
