@@ -21,7 +21,8 @@ public class Splash extends AppCompatActivity {
         TextView logo1 = (TextView) findViewById(R.id.TextViewTopTitle);
         Animation fade1 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         logo1.startAnimation(fade1);
-
+        MediaPlayer audio = MediaPlayer.create(Splash.this, R.raw.ohbanana);
+        audio.start();
 
         Animation spinin = AnimationUtils.loadAnimation(this, R.anim.custom_anim);
         LayoutAnimationController controller =
@@ -31,8 +32,7 @@ public class Splash extends AppCompatActivity {
         TableRow row = (TableRow) table.getChildAt(0);
         row.setLayoutAnimation(controller);
 
-        MediaPlayer audio = MediaPlayer.create(Splash.this, R.raw.ohbanana);
-        audio.start();
+
 //        for (int i = 0; i < table.getChildCount(); i++) {
 //            TableRow row = (TableRow) table.getChildAt(i);
 //            row.setLayoutAnimation(controller);
