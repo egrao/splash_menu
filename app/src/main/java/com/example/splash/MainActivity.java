@@ -26,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
         LayoutAnimationController controller =
                 new LayoutAnimationController(spinin);
         TableLayout table = (TableLayout) findViewById(R.id.TableLayout01);
-        for (int i = 0; i < table.getChildCount(); i++) {
-            TableRow row = (TableRow) table.getChildAt(i);
-            row.setLayoutAnimation(controller);
-        }
+        TableRow row = (TableRow) table.getChildAt(0);
+        row.setLayoutAnimation(controller);
+//        for (int i = 0; i < table.getChildCount(); i++) {
+//            TableRow row = (TableRow) table.getChildAt(i);
+//            row.setLayoutAnimation(controller);
+//        }
 
-        Animation fade2 = AnimationUtils.loadAnimation(this, R.anim.fade_in2);
-        TextView logo2 = (TextView) findViewById(R.id.TextViewBottomTitle);
-        logo2.startAnimation(fade2);
+//        Animation fade2 = AnimationUtils.loadAnimation(this, R.anim.fade_in2);
+//        TextView logo2 = (TextView) findViewById(R.id.TextViewBottomTitle);
+//        logo2.startAnimation(fade2);
 
         fade1.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -60,14 +62,16 @@ public class MainActivity extends AppCompatActivity {
 // Stop the animation
         TextView logo1 = (TextView) findViewById(R.id.TextViewTopTitle);
         logo1.clearAnimation();
-        TextView logo2 = (TextView) findViewById(R.id.TextViewBottomTitle);
-        logo2.clearAnimation();
+//        TextView logo2 = (TextView) findViewById(R.id.TextViewBottomTitle);
+//        logo2.clearAnimation();
 // ... stop other animations
         TableLayout table = (TableLayout) findViewById(R.id.TableLayout01);
-        for (int i = 0; i < table.getChildCount(); i++) {
-            TableRow row = (TableRow) table.getChildAt(i);
-            row.clearAnimation();
-        }
+        TableRow row = (TableRow) table.getChildAt(0);
+        row.clearAnimation();
+//        for (int i = 0; i < table.getChildCount(); i++) {
+//            TableRow row = (TableRow) table.getChildAt(i);
+//            row.clearAnimation();
+//        }
 
     }
 }
