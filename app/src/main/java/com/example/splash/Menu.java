@@ -2,12 +2,15 @@ package com.example.splash;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,10 +29,20 @@ public class Menu extends AppCompatActivity {
         menuItems = new ArrayList<String>();
         menuItems.add("2048");
         menuItems.add("PEG");
-//        menuItems.add("Entrenament especial");
+        menuItems.add("Settings");
 //        menuItems.add("Força i longitud");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.RED);
+                text.setTextSize(25);
+                text.setTypeface(null, Typeface.BOLD);
+                return view;
+            }
+        };
         listview.setAdapter(adapter);
 
         listview.setClickable(true);

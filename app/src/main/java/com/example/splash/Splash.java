@@ -11,7 +11,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         TableRow row = (TableRow) table.getChildAt(0);
         row.setLayoutAnimation(controller);
 
-        MediaPlayer audio = MediaPlayer.create(MainActivity.this, R.raw.ohbanana);
+        MediaPlayer audio = MediaPlayer.create(Splash.this, R.raw.ohbanana);
         audio.start();
 //        for (int i = 0; i < table.getChildCount(); i++) {
 //            TableRow row = (TableRow) table.getChildAt(i);
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(MainActivity.this,Menu.class));
-                MainActivity.this.finish();
+                startActivity(new Intent(Splash.this,Menu.class));
+                Splash.this.finish();
             }
 
             @Override
