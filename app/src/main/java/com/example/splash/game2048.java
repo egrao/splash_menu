@@ -294,7 +294,7 @@ public class game2048 extends AppCompatActivity {
                 if (cells[row][j].getText().equals("") && !(cells[row][j+1].getText().equals(""))) {
                     cells[row][j].setText(cells[row][j+1].getText()); //3
                     cells[row][j+1].setText(""); //2
-                }
+            }
             }
         }
     }
