@@ -3,4 +3,6 @@
     <dimen name="logo_size">48dp</dimen>
     <dimen name="version_size">15dp</dimen>
     <dimen name="version_spacing">3dp</dimen>
+    <dimen name="square">90dp</dimen>
+    <dimen name="numeroSize">30dp</dimen>
 </resources>

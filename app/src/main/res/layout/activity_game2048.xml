@@ -1,19 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D1D1D1"
     tools:context=".game2048">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aquí va el 2048"
-        android:textSize="80px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:text="@string/top_text"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginLeft="280dp"/>
+
+    <GridLayout
+        android:id="@+id/Grid"
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:columnCount="4"
+        android:rowCount="4"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:background="@drawable/bg_grid"
+        android:useDefaultMargins="true">
+
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_row="0"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="DuplicateSpeakableTextCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_row="0"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button16"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/square"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="0"
+            android:background="#c7bfb8"
+            android:clickable="false"
+            android:text="@string/celda"
+            android:textSize="@dimen/numeroSize"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+    </GridLayout>
+
+
+</LinearLayout>

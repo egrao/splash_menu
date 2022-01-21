@@ -10,4 +10,6 @@
     <string name="app_version_info">Version 2.0.0\nCopyright © 2011 Mamlambo\nAll
 Rights Reserved.</string>
     <string name="description">img</string>
+    <string name="celda"></string>
+    <string name="top_text">2048</string>
 </resources>
