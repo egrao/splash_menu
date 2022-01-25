@@ -52,13 +52,13 @@ public class Menu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if(position == 0){
 //                    img1.setVisibility(arg1.VISIBLE);
-                    showItem1(arg1);
+                    showItem1(arg1, game2048.class);
 
                 }
-//                    if(position == 1){
-////                    img2.setVisibility(arg1.VISIBLE);
-//                        showEntrenament2(arg1);
-//                    }
+                    if(position == 1){
+//                    img2.setVisibility(arg1.VISIBLE);
+                        showItem2(arg1, gamePeg.class);
+                    }
 //                    if(position == 2){
 ////                    img3.setVisibility(arg1.VISIBLE);
 //                        showEntrenament3(arg1);
@@ -71,12 +71,15 @@ public class Menu extends AppCompatActivity {
             }
         });
     }
-    public void showItem1(View view) {
-        showGame();
+    public void showItem1(View view, Class game) {
+        showGame(game2048.class);
+    }
+    public void showItem2(View view, Class game) {
+        showGame(gamePeg.class);
     }
 
-    public void showGame() {
-        Intent intent = new Intent(this, game2048.class);
+    public void showGame(Class game) {
+        Intent intent = new Intent(this, game);
         startActivity(intent);
     }
 }

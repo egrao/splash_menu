@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".gamePeg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PEG"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="280dp"/>
+
+    <GridLayout
+        android:id="@+id/Grid"
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:columnCount="7"
+        android:rowCount="7"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:useDefaultMargins="false"
+        >
+
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button5"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button7"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button8"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button9"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button10"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button11"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button12"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button13"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button14"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button15"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button16"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button17"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button18"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button19"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button20"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button21"
+            style="@style/CellButtons"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button22"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button23"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button24"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button25"
+            style="@style/CellButtons"
+            android:drawableStart="@drawable/peg_empty_piece"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button26"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button27"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button28"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button29"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button30"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button31"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button32"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button33"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button34"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button35"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button36"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button37"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button38"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button39"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button40"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button41"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button42"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button43"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button44"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button45"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button46"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button47"
+            style="@style/CellButtons"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button48"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/button49"
+            style="@style/CellButtons"
+            android:visibility="gone"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+    </GridLayout>
+
+
+</LinearLayout>
