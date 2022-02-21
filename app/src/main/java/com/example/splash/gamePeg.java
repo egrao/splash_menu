@@ -84,18 +84,8 @@ public class gamePeg extends AppCompatActivity {
                                 lastFila = aux2;
                                 lastColumna = aux3;
                             }
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece) && (grid.getChildAt(aux-7).getBackground().getConstantState()).equals(basePiece) && (lastAux-aux == -14)){
-                                Toast.makeText(gamePeg.this, "uwu1", Toast.LENGTH_SHORT).show();
-                                lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
-                                grid.getChildAt(aux-7).setBackgroundResource(R.drawable.peg_empty_piece);
-                                justClicked.setBackgroundResource(R.drawable.peg_base_piece);
-                                lastClicked = null;
-                                lastAux = aux;
-                                lastFila = aux2;
-                                lastColumna = aux3;
-                            }
 
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece) && (grid.getChildAt(aux+1).getBackground().getConstantState()).equals(basePiece) && (lastAux-aux == 2)){
+                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece) && (lastAux-aux == 2) && (grid.getChildAt(aux+1).getBackground().getConstantState()).equals(basePiece)){
                                 Toast.makeText(gamePeg.this, "uwu2", Toast.LENGTH_SHORT).show();
                                 lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                                 grid.getChildAt(aux+1).setBackgroundResource(R.drawable.peg_empty_piece);
@@ -106,10 +96,20 @@ public class gamePeg extends AppCompatActivity {
                                 lastColumna = aux3;
                             }
 
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece) && (grid.getChildAt(aux+7).getBackground().getConstantState()).equals(basePiece) && (lastAux-aux == 14)){
+                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece) && (lastAux-aux == 14) && (grid.getChildAt(aux+7).getBackground().getConstantState()).equals(basePiece)){
                                 Toast.makeText(gamePeg.this, "uwu3", Toast.LENGTH_SHORT).show();
                                 lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                                 grid.getChildAt(aux+7).setBackgroundResource(R.drawable.peg_empty_piece);
+                                justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                                lastClicked = null;
+                                lastAux = aux;
+                                lastFila = aux2;
+                                lastColumna = aux3;
+                            }
+                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece) && (lastAux-aux == -14) && (grid.getChildAt(aux-7).getBackground().getConstantState()).equals(basePiece)){
+                                Toast.makeText(gamePeg.this, "uwu1", Toast.LENGTH_SHORT).show();
+                                lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
+                                grid.getChildAt(aux-7).setBackgroundResource(R.drawable.peg_empty_piece);
                                 justClicked.setBackgroundResource(R.drawable.peg_base_piece);
                                 lastClicked = null;
                                 lastAux = aux;
