@@ -1,14 +1,13 @@
 <resources>
     <style name="CellButtons" parent="Widget.AppCompat.Button">
 <!--        <item name="android:background">#BE6930</item>-->
-        <item name="android:background">@drawable/peg_piece_bg</item>
+        <item name="android:background">@drawable/peg_base_piece</item>
         <item name="android:layout_width">@dimen/cell</item>
         <item name="android:layout_height">@dimen/cell</item>
         <item name="android:layout_rowWeight">0</item>
         <item name="android:layout_columnWeight">0</item>
         <item name="android:clickable">true</item>
         <item name="android:text">@string/celda</item>
-        <item name="android:drawableStart">@drawable/peg_base_piece</item>
         <item name="android:drawablePadding">0dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:gravity">center_horizontal|center_vertical</item>

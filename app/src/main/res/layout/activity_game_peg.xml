@@ -17,7 +17,7 @@
         android:layout_marginLeft="280dp"/>
 
     <GridLayout
-        android:id="@+id/Grid"
+        android:id="@+id/GridPeg"
         android:layout_width="match_parent"
         android:layout_height="410dp"
         android:layout_marginTop="100dp"
@@ -170,7 +170,7 @@
         <Button
             android:id="@+id/button25"
             style="@style/CellButtons"
-            android:drawableStart="@drawable/peg_empty_piece"
+            android:background="@drawable/peg_empty_piece"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
