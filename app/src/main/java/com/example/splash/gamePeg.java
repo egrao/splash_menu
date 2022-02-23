@@ -30,15 +30,11 @@ public class gamePeg extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_peg);
+
         /////////////////////COSAS/////////////////////////
-
-
-//        grid = findViewById(R.id.GridPeg);
-//        button = (Button) grid.getChildAt(2);
         gameOver = false;
         piecesConstantState();
         arrayButtons();
-//        button.setOnClickListener(myhandler1);
     }
 
     public void piecesConstantState(){
@@ -47,39 +43,252 @@ public class gamePeg extends AppCompatActivity {
         selectedPiece = getDrawable(R.drawable.peg_selected_piece).getConstantState();
     }
 
+
+    //                    checking possible moves sideways
     public void checkGameOver(){
-        for (int i = 0; i<49; i++){
-            if (i == 0 || i == 1 || i == 5 || i == 6 || i == 7 || i == 8 || i == 12 || i == 13 || i == 35 || i == 36 || i == 40 || i == 41 || i == 42 || i == 43 || i == 47 || i == 48){
+        gameOver = true;
+        for (int i = 0; i<pieces.length; i++){
+            for (int j = 0; j<pieces.length; j++){
+                int aux1 = j-2;
+                int aux2 = j+2;
+
+                if (aux1 == -2){
+                //                    checking possible moves sideways
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j+1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j+2].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "1", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if1 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                }
+
+                else if (aux1 == -1){
+                    //                    checking possible moves sideways
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j+1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j+2].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i][j-1].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "2", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if2 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                    //                    checking possible moves sideways
+                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j-1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j+1].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "3", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if3 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                }
+                ////////////
+                else if (aux2 == 7){
+                    //                    checking possible moves sideways
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j-1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j+1].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i][j-2].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "4", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if4 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                                      checking possible moves sideways
+                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j+1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j-1].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "5", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if5 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                }
+
+                else if (aux2 == 8){
+                //                    checking possible moves sideways
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j-1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j-2].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "6", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if6 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "61", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if7 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+//
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i+1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "62", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if8 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+                }
+
+
+                /////////
+                else if (aux1 >= 0 && aux2 <= 6){
+                    //                    checking possible moves sideways
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j+1].getBackground().getConstantState()).equals(basePiece)
+                    && ((pieces[i][j+2].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i][j-1].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "7", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if7 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "71", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if7 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+
+                    //                    checking possible moves sideways
+                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j-1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j-2].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i][j+1].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "8", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if8 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i+1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "81", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if8 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+//                    else{
+//                        gameOver = false;
+//                    }
+                }
+
 
             }
-            else{
-                if(((grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i+1).getBackground().getConstantState()).equals(basePiece))
-                        && ((grid.getChildAt(i+2).getBackground().getConstantState()).equals(emptyPiece) || (grid.getChildAt(i-1).getBackground().getConstantState()).equals(emptyPiece))
-                || ((grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i-1).getBackground().getConstantState()).equals(basePiece))
-                        && ((grid.getChildAt(i+1).getBackground().getConstantState()).equals(emptyPiece) || (grid.getChildAt(i-2).getBackground().getConstantState()).equals(emptyPiece))){
-                    Toast.makeText(gamePeg.this, "11", Toast.LENGTH_SHORT).show();
-                }
-//                else if(((grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i+7).getBackground().getConstantState()).equals(basePiece))
-//                        && ((grid.getChildAt(i+14).getBackground().getConstantState()).equals(emptyPiece) || (grid.getChildAt(i-7).getBackground().getConstantState()).equals(emptyPiece))
-//                        || ((grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i-7).getBackground().getConstantState()).equals(basePiece))
-//                        && ((grid.getChildAt(i+7).getBackground().getConstantState()).equals(emptyPiece) || (grid.getChildAt(i-14).getBackground().getConstantState()).equals(emptyPiece))){
-//                    Toast.makeText(gamePeg.this, "22", Toast.LENGTH_SHORT).show();
-//                }
-
-                else{
-                    gameOver = true;
-                }
-            }
-
         }
-        if(gameOver == true){
-            Toast.makeText(gamePeg.this, "ded", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(gamePeg.this, String.valueOf(gameOver), Toast.LENGTH_SHORT).show();
+//        if(gameOver == true){
+//            Toast.makeText(gamePeg.this, "dedSides", Toast.LENGTH_SHORT).show();
+//        }
+        if (gameOver == true){
+            checkGameOverToptoBottom();
         }
     }
+
+    //                    checking possible moves top to bottom
+    public void checkGameOverToptoBottom(){
+        for (int i = 0; i<pieces.length; i++){
+            for (int j = 0; j<pieces.length; j++){
+                int aux1 = i-2;
+                int aux2 = i+2;
+
+                if (aux1 == -2){
+//                    checking possible moves top to bottom
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "1", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if1 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                }
+
+                else if (aux1 == -1){
+//                    checking possible moves top to bottom
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "2", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if2 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    checking possible moves top to bottom
+                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i][j-1].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i][j+1].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "3", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if3 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                }
+
+                else if (aux2 == 7){
+//                    checking possible moves top to bottom
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i+1][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "4", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if4 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+
+                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "5", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if5 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+                }
+
+                else if (aux2 == 8){
+
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "6", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if6 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "61", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if7 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
 //
-//    || (grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i-1).getBackground().getConstantState()).equals(basePiece)
-//                        || (grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i+7).getBackground().getConstantState()).equals(basePiece)
-//                        || (grid.getChildAt(i).getBackground().getConstantState()).equals(basePiece) && (grid.getChildAt(i-7).getBackground().getConstantState()).equals(basePiece)
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i+1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "62", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if8 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+                }
+
+                else if (aux1 >= 0 && aux2 <= 6){
+
+                    if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "7", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if7 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "71", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if7 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+
+                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+                            && ((pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i+1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "8", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if8 "+"i:"+i+" j:"+j);
+                        gameOver = false;
+                    }
+//                    //                    checking possible moves top to bottom
+//                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i-1][j].getBackground().getConstantState()).equals(basePiece)
+//                            && ((pieces[i-2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i+1][j].getBackground().getConstantState()).equals(emptyPiece))){
+//                        Toast.makeText(gamePeg.this, "81", Toast.LENGTH_SHORT).show();
+//                        System.out.println("if8 "+"i:"+i+" j:"+j);
+//                        gameOver = false;
+//                    }
+//                    else{
+//                        gameOver = false;
+//                    }
+                }
+
+
+            }
+        }
+//        Toast.makeText(gamePeg.this, String.valueOf(gameOver), Toast.LENGTH_SHORT).show();
+        if(gameOver == true){
+            Toast.makeText(gamePeg.this, "Game Over bois", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     public void arrayButtons(){
         grid = findViewById(R.id.GridPeg);
@@ -88,98 +297,87 @@ public class gamePeg extends AppCompatActivity {
                 int aux=(fila*7)+columna;
                 int aux2 = fila;
                 int aux3 = columna;
-//                if (aux != 0 && aux != 1 && aux != 7 && aux != 8 && aux != 5 && aux != 6 && aux != 12 && aux != 13 && aux != 35 && aux != 36 && aux != 42 && aux != 43 && aux != 40 && aux != 41 && aux != 47 && aux != 48) {
-                    pieces[fila][columna] = (Button) grid.getChildAt(aux);
-                    pieces[fila][columna].setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            justClicked = findViewById(v.getId());
+                pieces[fila][columna] = (Button) grid.getChildAt(aux);
+                pieces[fila][columna].setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        justClicked = findViewById(v.getId());
 
-//                            System.out.println("peme "+ lastAux);
-//                            System.out.println("peme "+ filaAux);
-//                            System.out.println("peme "+ ColumnaAux);
+                        if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(basePiece)) {
+//                                Toast.makeText(gamePeg.this, "normal", Toast.LENGTH_SHORT).show();
+                            lastClicked = justClicked;
+                            lastAux = aux;
+                            lastFila = aux2;
+                            lastColumna = aux3;
+                            lastClicked.setBackgroundResource(R.drawable.peg_selected_piece);
+                        }
 
-                            if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(basePiece)) {
-                                Toast.makeText(gamePeg.this, "normal", Toast.LENGTH_SHORT).show();
-                                lastClicked = justClicked;
-                                lastAux = aux;
+                        else if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(emptyPiece)) {
+                            Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
+                        }
+
+                        else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
+                                && (lastColumna-aux3 == -2)
+                                && (pieces[aux2][aux3-1].getBackground().getConstantState()).equals(basePiece)){
+//                                Toast.makeText(gamePeg.this, "uwu1", Toast.LENGTH_SHORT).show();
+                            lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
+                            pieces[aux2][aux3-1].setBackgroundResource(R.drawable.peg_empty_piece);
+                            justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            lastClicked = null;
+                            checkGameOver();
+                        }
+
+                        else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
+                                && (lastColumna-aux3 == 2)
+                                && (pieces[aux2][aux3+1].getBackground().getConstantState()).equals(basePiece)){
+//                                Toast.makeText(gamePeg.this, "uwu2", Toast.LENGTH_SHORT).show();
+                            lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
+                            pieces[aux2][aux3+1].setBackgroundResource(R.drawable.peg_empty_piece);
+                            justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            lastClicked = null;
+                            checkGameOver();
+
+                        }
+
+                        else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
+                                && (lastFila-aux2 == 2)
+                                && (pieces[aux2+1][aux3].getBackground().getConstantState()).equals(basePiece)){
+//                                Toast.makeText(gamePeg.this, "uwu3", Toast.LENGTH_SHORT).show();
+                            lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
+                            pieces[aux2+1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
+                            justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            lastClicked = null;
+                            checkGameOver();
+
+                        }
+                        else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
+                                && (lastFila-aux2 == -2)
+                                && (pieces[aux2-1][aux3].getBackground().getConstantState()).equals(basePiece)){
+//                                Toast.makeText(gamePeg.this, "uwu4", Toast.LENGTH_SHORT).show();
+                            lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
+                            pieces[aux2-1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
+                            justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            lastClicked = null;
+                            checkGameOver();
+                        }
+
+                        else{
+                            if(justClicked.getBackground().getConstantState().equals(emptyPiece)
+                                    && lastClicked.getBackground().getConstantState().equals(selectedPiece)) {
+//                                    Toast.makeText(gamePeg.this, "SIKE ENT", Toast.LENGTH_SHORT).show();
+                            }
+
+                            else {
+//                                    Toast.makeText(gamePeg.this, "entramos", Toast.LENGTH_SHORT).show();
+                                lastClicked.setBackgroundResource(R.drawable.peg_base_piece);
+//                                    lastAux = aux;
                                 lastFila = aux2;
                                 lastColumna = aux3;
+                                lastClicked = justClicked;
                                 lastClicked.setBackgroundResource(R.drawable.peg_selected_piece);
                             }
-
-                            else if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(emptyPiece)) {
-                                Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
-//                                checkGameOver();
-                            }
-
-
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
-                                    && (lastColumna-aux3 == -2)
-                                    && (pieces[aux2][aux3-1].getBackground().getConstantState()).equals(basePiece)){
-                                Toast.makeText(gamePeg.this, "uwu1", Toast.LENGTH_SHORT).show();
-                                lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
-                                pieces[aux2][aux3-1].setBackgroundResource(R.drawable.peg_empty_piece);
-                                justClicked.setBackgroundResource(R.drawable.peg_base_piece);
-                                lastClicked = null;
-
-                            }
-
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
-                                    && (lastColumna-aux3 == 2)
-                                    && (pieces[aux2][aux3+1].getBackground().getConstantState()).equals(basePiece)){
-                                Toast.makeText(gamePeg.this, "uwu2", Toast.LENGTH_SHORT).show();
-                                lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
-                                pieces[aux2][aux3+1].setBackgroundResource(R.drawable.peg_empty_piece);
-                                justClicked.setBackgroundResource(R.drawable.peg_base_piece);
-                                lastClicked = null;
-
-                            }
-
-
-
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
-                                    && (lastFila-aux2 == 2)
-                                    && (pieces[aux2+1][aux3].getBackground().getConstantState()).equals(basePiece)){
-                                Toast.makeText(gamePeg.this, "uwu3", Toast.LENGTH_SHORT).show();
-                                lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
-                                pieces[aux2+1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
-                                justClicked.setBackgroundResource(R.drawable.peg_base_piece);
-                                lastClicked = null;
-//                                lastAux = aux;
-//                                lastFila = aux2;
-//                                lastColumna = aux3;
-
-                            }
-                            else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
-                                    && (lastFila-aux2 == -2)
-                                    && (pieces[aux2-1][aux3].getBackground().getConstantState()).equals(basePiece)){
-                                Toast.makeText(gamePeg.this, "uwu4", Toast.LENGTH_SHORT).show();
-                                lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
-                                pieces[aux2-1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
-                                justClicked.setBackgroundResource(R.drawable.peg_base_piece);
-                                lastClicked = null;
-
-                            }
-
-
-                            else{
-                                if(justClicked.getBackground().getConstantState().equals(emptyPiece)
-                                        && lastClicked.getBackground().getConstantState().equals(selectedPiece)) {
-                                    Toast.makeText(gamePeg.this, "SIKE ENT", Toast.LENGTH_SHORT).show();
-                                }
-
-                                else {
-                                    Toast.makeText(gamePeg.this, "entramos", Toast.LENGTH_SHORT).show();
-                                    lastClicked.setBackgroundResource(R.drawable.peg_base_piece);
-//                                    lastAux = aux;
-                                    lastFila = aux2;
-                                    lastColumna = aux3;
-                                    lastClicked = justClicked;
-                                    lastClicked.setBackgroundResource(R.drawable.peg_selected_piece);
-                                }
-                            }
                         }
-                    });
+                    }
+                });
             }
         }
     }
@@ -196,7 +394,5 @@ public class gamePeg extends AppCompatActivity {
 ////            }
 //        }
 //    };
-//    public void onClick(View v) {
-//
-//    }
+
 }
