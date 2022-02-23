@@ -16,6 +16,26 @@
         android:textColor="@color/black"
         android:layout_marginLeft="280dp"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="@dimen/cell"
+            android:layout_height="@dimen/cell"
+            android:text="U"
+            android:onClick="undoButton"
+            />
+        <Button
+            android:layout_width="@dimen/cell"
+            android:layout_height="@dimen/cell"
+            android:text="R"
+            android:onClick="restartButton"
+            />
+    </LinearLayout>
+
     <GridLayout
         android:id="@+id/GridPeg"
         android:layout_width="match_parent"

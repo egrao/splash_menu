@@ -22,8 +22,10 @@ public class gamePeg extends AppCompatActivity {
     private Drawable.ConstantState basePiece;
     private Drawable.ConstantState emptyPiece;
     private Drawable.ConstantState selectedPiece;
+    private Drawable.ConstantState borderPiece;
     private Button[][] pieces = new Button [7][7];
-    private Drawable[][] drawableMatrix;
+    private Drawable[][] initialMatrix = new Drawable [7][7];
+    private Drawable[][] copiedMatrix = new Drawable [7][7];
     private boolean gameOver;
     private boolean win;
 
@@ -38,12 +40,16 @@ public class gamePeg extends AppCompatActivity {
         win = false;
         piecesConstantState();
         arrayButtons();
+        copyBoard(pieces, initialMatrix);
+        copyBoard(pieces, copiedMatrix);
+
     }
 
     public void piecesConstantState(){
         basePiece = getDrawable(R.drawable.peg_base_piece).getConstantState();
         emptyPiece = getDrawable(R.drawable.peg_empty_piece).getConstantState();
         selectedPiece = getDrawable(R.drawable.peg_selected_piece).getConstantState();
+        borderPiece = getDrawable(R.drawable.peg_piece_bg).getConstantState();
     }
 
 
@@ -61,6 +67,7 @@ public class gamePeg extends AppCompatActivity {
 
                         if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(basePiece)) {
 //                                Toast.makeText(gamePeg.this, "normal", Toast.LENGTH_SHORT).show();
+                            copyBoard(pieces, copiedMatrix);
                             lastClicked = justClicked;
                             lastFila = aux2;
                             lastColumna = aux3;
@@ -69,13 +76,16 @@ public class gamePeg extends AppCompatActivity {
                         }
 
                         else if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(emptyPiece)) {
-//                            Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
+//                            copyBoard(pieces, copiedMatrix);
+                            Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
+//                            repaintBoard(copiedMatrix);
                         }
 
                         else if((justClicked.getBackground().getConstantState()).equals(emptyPiece)
                                 && (lastColumna-aux3 == -2 && lastFila == aux2)
                                 && (pieces[aux2][aux3-1].getBackground().getConstantState()).equals(basePiece)){
 //                                Toast.makeText(gamePeg.this, "uwu1", Toast.LENGTH_SHORT).show();
+                            copyBoard(pieces, copiedMatrix);
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2][aux3-1].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
@@ -87,6 +97,7 @@ public class gamePeg extends AppCompatActivity {
                                 && (lastColumna-aux3 == 2  && lastFila == aux2)
                                 && (pieces[aux2][aux3+1].getBackground().getConstantState()).equals(basePiece)){
 //                                Toast.makeText(gamePeg.this, "uwu2", Toast.LENGTH_SHORT).show();
+                            copyBoard(pieces, copiedMatrix);
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2][aux3+1].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
@@ -99,6 +110,7 @@ public class gamePeg extends AppCompatActivity {
                                 && (lastFila-aux2 == 2  && lastColumna == aux3)
                                 && (pieces[aux2+1][aux3].getBackground().getConstantState()).equals(basePiece)){
 //                                Toast.makeText(gamePeg.this, "uwu3", Toast.LENGTH_SHORT).show();
+                            copyBoard(pieces, copiedMatrix);
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2+1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
@@ -110,6 +122,7 @@ public class gamePeg extends AppCompatActivity {
                                 && (lastFila-aux2 == -2  && lastColumna == aux3)
                                 && (pieces[aux2-1][aux3].getBackground().getConstantState()).equals(basePiece)){
 //                                Toast.makeText(gamePeg.this, "uwu4", Toast.LENGTH_SHORT).show();
+                            copyBoard(pieces, copiedMatrix);
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2-1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
@@ -125,6 +138,7 @@ public class gamePeg extends AppCompatActivity {
 
                             else {
 //                                    Toast.makeText(gamePeg.this, "entramos", Toast.LENGTH_SHORT).show();
+                                copyBoard(pieces, copiedMatrix);
                                 lastClicked.setBackgroundResource(R.drawable.peg_base_piece);
                                 lastFila = aux2;
                                 lastColumna = aux3;
@@ -138,13 +152,42 @@ public class gamePeg extends AppCompatActivity {
         }
     }
 
-    public void repaintBoard( Drawable[][] matrix ){
-        drawableMatrix = matrix;
+    public void copyBoard( Button[][] sourceMatrix,  Drawable[][] copiedMatrix){
         for (int fila = 0; fila<pieces.length; fila++){
             for(int columna=0; columna<pieces.length; columna++){
+                if(sourceMatrix[fila][columna].getBackground().getCurrent().getConstantState().equals(selectedPiece)){
+                    copiedMatrix[fila][columna] = getDrawable(R.drawable.peg_base_piece);
+                }
+                else {
+                    copiedMatrix[fila][columna] = sourceMatrix[fila][columna].getBackground().getCurrent();
+                }
             }
         }
+//        return copiedMatrix;
     }
+
+//
+    public void repaintBoard( Drawable[][] matrix ){
+//        drawableMatrix = matrix;
+        for (int fila = 0; fila<pieces.length; fila++){
+            for(int columna=0; columna<pieces.length; columna++){
+//                pieces[fila][columna].setBackgroundResource();
+                pieces[fila][columna].setBackground(matrix[fila][columna]);
+            }
+        }
+        lastClicked = null;
+    }
+
+    public void undoButton(View view) {
+        repaintBoard(copiedMatrix);
+    }
+
+    public void restartButton(View view) {
+        copyBoard(initialMatrix, copiedMatrix);
+        repaintBoard(initialMatrix);
+    }
+
+
 
     public boolean checkWin(){
         int cont = 0;
