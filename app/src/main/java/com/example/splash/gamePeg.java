@@ -220,7 +220,7 @@ public class gamePeg extends AppCompatActivity {
 //                        System.out.println("if7 "+"i:"+i+" j:"+j);
                         gameOver = false;
                     }
-//                    //                    checking possible moves top to bottom
+//                    //                   checking possible moves top to bottom
 //                    else if((pieces[i][j].getBackground().getConstantState()).equals(basePiece) && (pieces[i+1][j].getBackground().getConstantState()).equals(basePiece)
 //                            && ((pieces[i+2][j].getBackground().getConstantState()).equals(emptyPiece) || (pieces[i-1][j].getBackground().getConstantState()).equals(emptyPiece))){
 //                        Toast.makeText(gamePeg.this, "71", Toast.LENGTH_SHORT).show();
