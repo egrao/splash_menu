@@ -23,7 +23,9 @@ public class gamePeg extends AppCompatActivity {
     private Drawable.ConstantState emptyPiece;
     private Drawable.ConstantState selectedPiece;
     private Button[][] pieces = new Button [7][7];
+    private Drawable[][] drawableMatrix;
     private boolean gameOver;
+    private boolean win;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,9 @@ public class gamePeg extends AppCompatActivity {
         setContentView(R.layout.activity_game_peg);
 
         /////////////////////COSAS/////////////////////////
+
         gameOver = false;
+        win = false;
         piecesConstantState();
         arrayButtons();
     }
@@ -45,8 +49,8 @@ public class gamePeg extends AppCompatActivity {
 
     public void arrayButtons(){
         grid = findViewById(R.id.GridPeg);
-        for (int fila = 0; fila<7; fila++){
-            for(int columna=0; columna<7; columna++){
+        for (int fila = 0; fila<pieces.length; fila++){
+            for(int columna=0; columna<pieces.length; columna++){
                 int aux=(fila*7)+columna;
                 int aux2 = fila;
                 int aux3 = columna;
@@ -61,6 +65,7 @@ public class gamePeg extends AppCompatActivity {
                             lastFila = aux2;
                             lastColumna = aux3;
                             lastClicked.setBackgroundResource(R.drawable.peg_selected_piece);
+
                         }
 
                         else if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(emptyPiece)) {
@@ -131,6 +136,34 @@ public class gamePeg extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    public void repaintBoard( Drawable[][] matrix ){
+        drawableMatrix = matrix;
+        for (int fila = 0; fila<pieces.length; fila++){
+            for(int columna=0; columna<pieces.length; columna++){
+            }
+        }
+    }
+
+    public boolean checkWin(){
+        int cont = 0;
+        int fila = 0;
+        int columna = 0;
+            while (fila < pieces.length && cont < 2) {
+                fila++;
+                while (columna < pieces.length && cont < 2) {
+                    if (pieces[fila][columna].getBackground().getConstantState().equals(basePiece)) {
+                        cont++;
+                    }
+                    columna++;
+                }
+            }
+
+        if(cont == 1){
+            win = true;
+        }
+        return win;
     }
 
     //                    checking possible moves sideways
@@ -373,9 +406,15 @@ public class gamePeg extends AppCompatActivity {
             }
         }
 //        Toast.makeText(gamePeg.this, String.valueOf(gameOver), Toast.LENGTH_SHORT).show();
+        win = checkWin();
         if(gameOver == true){
+            if(win == true){
+                Toast.makeText(gamePeg.this, "WINNER DINNER", Toast.LENGTH_SHORT).show();
+            }
+            else{
             Toast.makeText(gamePeg.this, "Game Over bois", Toast.LENGTH_SHORT).show();
             System.out.println("Game Over bois pack it up");
+            }
         }
     }
 
