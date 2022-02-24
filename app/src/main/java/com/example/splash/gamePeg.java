@@ -40,6 +40,7 @@ public class gamePeg extends AppCompatActivity {
         win = false;
         piecesConstantState();
         arrayButtons();
+        //copying initial position into 2 arrays
         copyBoard(pieces, initialMatrix);
         copyBoard(pieces, copiedMatrix);
 
@@ -183,7 +184,7 @@ public class gamePeg extends AppCompatActivity {
     }
 
     public void restartButton(View view) {
-        copyBoard(initialMatrix, copiedMatrix);
+//        copyBoard(initialMatrix, copiedMatrix);
         repaintBoard(initialMatrix);
     }
 

@@ -1,10 +1,14 @@
 package com.example.splash;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,11 +19,19 @@ public class game2048 extends AppCompatActivity {
 
     private GestureDetector mDetector;
     private GridLayout grid;
+    private LinearLayout ScoreBestLinear;
+    TextView scoreHolder;
     private Integer randomFila;
     private Integer randomColumn;
     private Integer random100;
-    private int gameOver;
+    private Integer score;
+    private Integer scoreUndo;
+
+    private boolean gameOver;
+    private boolean win;
     private Button[][] cells = new Button [4][4];
+    private String[][] initialBoard = new String [4][4];
+    private String[][] copiedBoard = new String [4][4];
 
 
     @Override
@@ -28,9 +40,17 @@ public class game2048 extends AppCompatActivity {
         setContentView(R.layout.activity_game2048);
 /////////////////////COSAS/////////////////
         grid = findViewById(R.id.Grid);
+        ScoreBestLinear = findViewById(R.id.ScoreBestId);
         mDetector = new GestureDetector(this, new GestureListener());
+        scoreHolder = (TextView) ScoreBestLinear.getChildAt(0);
+        score = 0;
+        gameOver = false;
+        win = false;
+
         arrayButtons();
         board();
+        initialBoard = copyBoard(cells);
+        copiedBoard = copyBoard(cells);
     }
 
     @Override
@@ -86,9 +106,8 @@ public class game2048 extends AppCompatActivity {
     }
 
     public void arrayButtons(){
-        grid = findViewById(R.id.Grid);
-        for (int i = 0; i<4; i++){
-            for(int j=0; j<4; j++){
+        for (int i = 0; i< cells.length; i++){
+            for(int j=0; j<cells.length; j++){
                 int aux=(i*4)+j;
                 cells[i][j] = (Button) grid.getChildAt(aux);
             }
@@ -96,48 +115,48 @@ public class game2048 extends AppCompatActivity {
     }
 
     public void board(){
-//        grid = findViewById(R.id.Grid);
-
-//        cells[0][0].setText("8");
-//        cells[0][1].setText("8");
-//        cells[0][2].setText("8");
-//        cells[0][3].setText("8");
-
-
-//        Button button5 = (Button) grid.getChildAt(4);
-//        button5.setText(String.valueOf(5));
-
-
         for (int i = 0; i < 2; i++) {
-//            randomCelda = new Random().nextInt(16);
-//            random100 = new Random().nextInt(101);
-//            button = (Button) grid.getChildAt(randomCelda);
-//            do {
-//                randomCelda = new Random().nextInt(16);
-//                button = (Button) grid.getChildAt(randomCelda);
-//            }while(!button.getText().equals(""));
-//
-//            if (random100 <= 90) {
-//                button.setText(String.valueOf(2));
-//            }else if (random100>90 && random100<=100){
-//                button.setText(String.valueOf(4));
-//
-//            }
-
             newCell();
         }
     }
 
+    public String [][] copyBoard( Button[][] originalBoard){
+        String [][] newBoard = new String [cells.length][cells.length];
+        for (int i = 0; i<cells.length; i++){
+            for(int j=0; j<cells.length; j++){
+                  newBoard[i][j] = String.valueOf(originalBoard[i][j].getText());
+            }
+        }
+        return newBoard;
+    }
+
+    public void repaintBoard( String[][] board ){
+        for (int i = 0; i<cells.length; i++){
+            for(int j=0; j<cells.length; j++){
+                cells[i][j].setText(board[i][j]);
+            }
+        }
+        paintColor();
+    }
+
+
+    public void setScore(Integer result){
+        score += result;
+        scoreHolder.setText(String.valueOf(score));
+    }
+
+    public void checkWin(){
+        if(win == true){
+            Toast.makeText(game2048.this, "SUCCESFULLY INVADED UKRANIA", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void newCell(){
-        gameOver = 0;
         randomFila = new Random().nextInt(4);
         randomColumn = new Random().nextInt(4);
         random100 = new Random().nextInt(101);
 
-
-//        button = (Button) grid.getChildAt(randomCelda);
         do {
-            gameOver++;
             randomFila = new Random().nextInt(4);
             randomColumn = new Random().nextInt(4);
         }while(!cells[randomFila][randomColumn].getText().equals(""));
@@ -155,61 +174,55 @@ public class game2048 extends AppCompatActivity {
         }
 
     }
-    public void flingRight(){
 
+    public void flingRight(){
+        copiedBoard = copyBoard(cells);
         for (int i=0; i<4;i++){
             checkRight(i);
             addRight(i);
             checkRight(i);
-            paintboard();
+            paintColor();
         }
         newCell();
-
-//        Button button1 = (Button) grid.getChildAt(0);
-//        Button button2 = (Button) grid.getChildAt(1);
-//        Button button3 = (Button) grid.getChildAt(2);
-//        Button button4 = (Button) grid.getChildAt(3);
-//
-//
-//        if (button1.getText() == button2.getText() && button1.getText() == button3.getText() && button1.getText() == ((Button) grid.getChildAt(3)).getText()) {
-//            int original = Integer.parseInt(String.valueOf(button1.getText()));
-//            int result = original * 4;
-//            button1.setText("");
-//            button2.setText("");
-//            button3.setText("");
-//            button4.setText(String.valueOf(result));
-//        }
+        checkWin();
 
     }
 
     public void flingLeft(){
+        copiedBoard = copyBoard(cells);
         for (int i=0; i<4;i++){
             checkLeft(i);
             addLeft(i);
             checkLeft(i);
-            paintboard();
+            paintColor();
         }
         newCell();
+        checkWin();
     }
 
     public void flingUp(){
+        copiedBoard = copyBoard(cells);
         for (int i=0; i<4;i++){
             checkUp(i);
             addUp(i);
             checkUp(i);
-            paintboard();
+            paintColor();
         }
         newCell();
+        checkWin();
     }
 
     public void flingDown(){
+        copiedBoard = copyBoard(cells);
+        scoreUndo = score;
         for (int i=0; i<4;i++){
             checkDown(i);
             addDown(i);
             checkDown(i);
-            paintboard();
+            paintColor();
         }
         newCell();
+        checkWin();
 
     }
 
@@ -243,6 +256,7 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[row][i-1].setText(""); //2
                     cells[row][i].setText(String.valueOf(result)); //3
+                    setScore(result);
                 }
             }
         }
@@ -284,6 +298,7 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[row][i+1].setText(""); //2
                     cells[row][i].setText(String.valueOf(result)); //3
+                    setScore(result);
                 }
             }
         }
@@ -311,6 +326,7 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[i+1][column].setText(""); //2
                     cells[i][column].setText(String.valueOf(result)); //3
+                    setScore(result);
                 }
             }
         }
@@ -338,6 +354,8 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[i-1][column].setText(""); //2
                     cells[i][column].setText(String.valueOf(result)); //3
+                    cells[i][column].setText(String.valueOf(result)); //3
+                    setScore(result);
                 }
             }
         }
@@ -353,7 +371,8 @@ public class game2048 extends AppCompatActivity {
             }
         }
     }
-    public void paintboard(){
+
+    public void paintColor(){
         for (int i = 0; i<4; i++){
             for(int j=0; j<4; j++){
                 int color = paintCell(cells[i][j].getText().toString());
@@ -408,8 +427,20 @@ public class game2048 extends AppCompatActivity {
 
             case "2048":
 //                return R.drawable.n_2048;
+                win = true;
                 return 0xFFE8BE4E;
         }
         return 0xFFC7BFB8;
+    }
+
+    public void undoButton2048(View view) {
+        repaintBoard(copiedBoard);
+//        setScore(scoreUndo);
+    }
+
+    public void restartButton2048(View view) {
+//        copyBoard(initialMatrix, copiedMatrix);
+        repaintBoard(initialBoard);
+//        setScore(score*-1);
     }
 }
