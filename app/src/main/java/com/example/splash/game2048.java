@@ -28,6 +28,7 @@ public class game2048 extends AppCompatActivity {
     private Integer score;
     private Integer scoreUndo;
 
+    private boolean emptyCells;
     private boolean gameOver;
     private boolean win;
     private Button[][] cells = new Button [4][4];
@@ -45,13 +46,14 @@ public class game2048 extends AppCompatActivity {
         ScoreBestLinear = findViewById(R.id.ScoreBestId);
         mDetector = new GestureDetector(this, new GestureListener());
         scoreHolder = (TextView) ScoreBestLinear.getChildAt(0);
+
         score = 0;
         gameOver = false;
         win = false;
 
         arrayButtons(cells);
-        board();
         initialBoard = copyBoard(cells);
+        board();
         copiedBoard = copyBoard(cells);
 //        cells[0][1].setBackgroundColor(paintCell(String.valueOf(1024)));
 //        cells[0][2].setBackgroundColor(paintCell(String.valueOf(1024)));
@@ -157,52 +159,81 @@ public class game2048 extends AppCompatActivity {
 
 
     public void setScore(Integer result){
-//        score = Integer.parseInt(scoreHolder.getText().toString());
         int newScore = score + result;
         scoreHolder.setText(String.valueOf(newScore));
     }
 
-//    public void checkGameOve(){
-//        gameOver = true;
-//        String [][] auxBoard = copyBoard(cells);
-//        Button[][] auxBoard2;
-//        arrayButtons(auxBoard2);
-////        gameOver = Arrays.deepEquals(copiedBoard, auxBoard);
-//
-//
-//        for (int i=0; i<4;i++){
-//            checkDown(i, auxBoard2);
-//            addDown(i, auxBoard2);
-//            checkDown(i, auxBoard2);
-//            paintColor();
-//        }
-//        newCell(auxBoard2);
-//
-//        String [][] auxBoard3 = copyBoard(auxBoard2);
-//        gameOver = Arrays.deepEquals(auxBoard, auxBoard3);
-//        System.out.println("gameover"+String.valueOf(gameOver));
-//
-////        checkGameOver();
-//        if (gameOver == true) {
-//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
-//        }
-//        else{
-//            Toast.makeText(game2048.this, "u suck bro", Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
+
+    public boolean checkEmptyCells(){
+        emptyCells = true;
+        for (int i = 0; i<cells.length; i++){
+            for(int j=0; j<cells.length; j++){
+                if(cells[i][j].getText().equals("")){
+                    return emptyCells;
+                }
+            }
+        }
+        emptyCells = false;
+        return emptyCells;
+    }
 
     public void checkGameOver(){
-        String [][] auxBoard = copyBoard(cells);
-        gameOver = Arrays.deepEquals(copiedBoard, auxBoard);
-        System.out.println("gameover"+String.valueOf(gameOver));
+        emptyCells = checkEmptyCells();
+        System.out.println("gameover empty"+emptyCells);
+        gameOver = true;
 
-//        checkGameOver();
-        if (gameOver == true) {
-            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+        if(emptyCells == false){
+            //right
+            for (int row=0; row<4;row++) {
+                for (int i = 3; i > 0; i--) {
+                    if (cells[row][i].getText().equals(cells[row][i - 1].getText())) {
+                        gameOver = false;
+                        break;
+                    }
+                }
+            }
+            //left
+            if(gameOver == true) {
+                for (int row = 0; row < 4; row++) {
+                    for (int i = 0; i < 3; i++) {
+                        if (cells[row][i].getText().equals(cells[row][i + 1].getText())) {
+                            gameOver = false;
+                            break;
+                        }
+                    }
+
+                }
+            }
+            //up
+            if(gameOver == true) {
+                for (int column = 0; column < 4; column++) {
+                    for (int i = 0; i < 3; i++) {
+                        if (cells[i][column].getText().equals(cells[i + 1][column].getText())) {
+                            gameOver = false;
+                            break;
+                        }
+                    }
+
+                }
+            }
+            //down
+            if(gameOver == true) {
+                for (int column = 0; column < 4; column++) {
+                    for (int i = 3; i > 0; i--) {
+                        if (cells[i][column].getText().equals(cells[i - 1][column].getText())) {
+                            gameOver = false;
+                            break;
+                        }
+                    }
+                }
+            }
         }
         else{
-//            Toast.makeText(game2048.this, "u suck bro", Toast.LENGTH_SHORT).show();
+            gameOver = false;
+        }
+        System.out.println("gameover "+gameOver);
+        if (gameOver == true) {
+            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -224,7 +255,6 @@ public class game2048 extends AppCompatActivity {
             randomColumn = new Random().nextInt(4);
             cont++;
         }while(!cells[randomFila][randomColumn].getText().equals("") && cont<500);
-        System.out.println("gameover "+cont);
 
         if (random100 <= 90 && cont<500) {
 
@@ -249,9 +279,8 @@ public class game2048 extends AppCompatActivity {
             paintColor();
         }
         newCell(cells);
-//        checkGameOver();
+        checkGameOver();
         checkWin();
-//        checkGameOver();
 //        checkGameOver();
 //        if (gameOver) {
 //            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
@@ -267,9 +296,8 @@ public class game2048 extends AppCompatActivity {
             paintColor();
         }
         newCell(cells);
-//        checkGameOver();
+        checkGameOver();
         checkWin();
-//        checkGameOver();
 //        if (gameOver) {
 //            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
 //        }
@@ -284,9 +312,8 @@ public class game2048 extends AppCompatActivity {
             paintColor();
         }
         newCell(cells);
-//        checkGameOver();
+        checkGameOver();
         checkWin();
-//        checkGameOver();
 //        if (gameOver) {
 //            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
 //        }
@@ -301,9 +328,8 @@ public class game2048 extends AppCompatActivity {
             paintColor();
         }
         newCell(cells);
-//        checkGameOver();
+        checkGameOver();
         checkWin();
-//        checkGameOver();
 //        if (gameOver) {
 //            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
 //        }
@@ -466,54 +492,41 @@ public class game2048 extends AppCompatActivity {
                 cells[i][j].setBackgroundColor(color);
             }
         }
-
-
     }
 
     public int paintCell(String num) {
         switch (num) {
             case "2":
-//                return R.drawable.n_2;
                 return 0xFFEEE6DB;
 
             case "4":
-//                return R.drawable.n_4;
                 return 0xFFECDEC3;
 
             case "8":
-//                return R.drawable.n_8;
                 return 0xFFEEB27E;
 
             case "16":
-//                return R.drawable.n_16;
                 return 0xFFF59666;
 
             case "32":
-//                return R.drawable.n_32;
                 return 0xFFF37C64;
 
             case "64":
-//                return R.drawable.n_64;
                 return 0xFFF46042;
 
             case "128":
-//                return R.drawable.n_128;
                 return 0xFFEACF76;
 
             case "256":
-//                return R.drawable.n_256;
                 return 0xFFEBCA69;
 
             case "512":
-//                return R.drawable.n_512;
                 return 0xFFEDC95B;
 
             case "1024":
-//                return R.drawable.n_1024;
                 return 0xFFEAC155;
 
             case "2048":
-//                return R.drawable.n_2048;
                 win = true;
                 return 0xFFE8BE4E;
         }
@@ -527,12 +540,12 @@ public class game2048 extends AppCompatActivity {
     }
 
     public void restartButton2048(View view) {
-////        copyBoard(initialMatrix, copiedMatrix);
-//        score = 0;
-//        win = false;
-////        gameOver = false;
-//        repaintBoard(initialBoard);
-//        setScore(score);
-        checkGameOver();
+//        copyBoard(initialMatrix, copiedMatrix);
+        score = 0;
+        win = false;
+        gameOver = false;
+        repaintBoard(initialBoard);
+        setScore(score);
+        board();
     }
 }
