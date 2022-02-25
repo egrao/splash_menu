@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class game2048 extends AppCompatActivity {
@@ -80,21 +81,21 @@ public class game2048 extends AppCompatActivity {
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
-                            Toast.makeText(game2048.this, "RIGHT", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(game2048.this, "RIGHT", Toast.LENGTH_SHORT).show();
                             flingRight();
                         } else {
                             flingLeft();
-                            Toast.makeText(game2048.this, "LEFT", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(game2048.this, "LEFT", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {
                     if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffY > 0) {
                             flingDown();
-                            Toast.makeText(game2048.this, "DOWN", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(game2048.this, "DOWN", Toast.LENGTH_SHORT).show();
                         } else {
                             flingUp();
-                            Toast.makeText(game2048.this, "UP", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(game2048.this, "UP", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -141,9 +142,15 @@ public class game2048 extends AppCompatActivity {
 
 
     public void setScore(Integer result){
-        score += result;
-        scoreHolder.setText(String.valueOf(score));
+//        score = Integer.parseInt(scoreHolder.getText().toString());
+        int newScore = score + result;
+        scoreHolder.setText(String.valueOf(newScore));
     }
+
+//    public void checkGameOver(){
+//        String [][] auxBoard = copyBoard(cells);
+//        gameOver = Arrays.deepEquals(copiedBoard, auxBoard);
+//    }
 
     public void checkWin(){
         if(win == true){
@@ -185,7 +192,10 @@ public class game2048 extends AppCompatActivity {
         }
         newCell();
         checkWin();
-
+//        checkGameOver();
+//        if (gameOver) {
+//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void flingLeft(){
@@ -198,6 +208,10 @@ public class game2048 extends AppCompatActivity {
         }
         newCell();
         checkWin();
+//        checkGameOver();
+//        if (gameOver) {
+//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void flingUp(){
@@ -210,11 +224,14 @@ public class game2048 extends AppCompatActivity {
         }
         newCell();
         checkWin();
+//        checkGameOver();
+//        if (gameOver) {
+//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void flingDown(){
         copiedBoard = copyBoard(cells);
-        scoreUndo = score;
         for (int i=0; i<4;i++){
             checkDown(i);
             addDown(i);
@@ -223,7 +240,10 @@ public class game2048 extends AppCompatActivity {
         }
         newCell();
         checkWin();
-
+//        checkGameOver();
+//        if (gameOver) {
+//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void addRight(int row){
@@ -256,6 +276,7 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[row][i-1].setText(""); //2
                     cells[row][i].setText(String.valueOf(result)); //3
+                    score = Integer.parseInt(scoreHolder.getText().toString());
                     setScore(result);
                 }
             }
@@ -298,6 +319,7 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[row][i+1].setText(""); //2
                     cells[row][i].setText(String.valueOf(result)); //3
+                    score = Integer.parseInt(scoreHolder.getText().toString());
                     setScore(result);
                 }
             }
@@ -326,6 +348,7 @@ public class game2048 extends AppCompatActivity {
                     int result = original * 2;
                     cells[i+1][column].setText(""); //2
                     cells[i][column].setText(String.valueOf(result)); //3
+                    score = Integer.parseInt(scoreHolder.getText().toString());
                     setScore(result);
                 }
             }
@@ -355,6 +378,7 @@ public class game2048 extends AppCompatActivity {
                     cells[i-1][column].setText(""); //2
                     cells[i][column].setText(String.valueOf(result)); //3
                     cells[i][column].setText(String.valueOf(result)); //3
+                    score = Integer.parseInt(scoreHolder.getText().toString());
                     setScore(result);
                 }
             }
@@ -435,12 +459,13 @@ public class game2048 extends AppCompatActivity {
 
     public void undoButton2048(View view) {
         repaintBoard(copiedBoard);
-//        setScore(scoreUndo);
+        setScore(0);
     }
 
     public void restartButton2048(View view) {
 //        copyBoard(initialMatrix, copiedMatrix);
+        score = 0;
         repaintBoard(initialBoard);
-//        setScore(score*-1);
+        setScore(score);
     }
 }
