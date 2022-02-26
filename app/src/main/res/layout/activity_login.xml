@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/uno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_weight="15"
+        android:gravity="top|center"
+        android:text=""
+        android:textColor="@color/logo_color"
+        android:textSize="@dimen/logo_size"
+        android:textStyle="bold"></TextView>
+    <TextView
+        android:id="@+id/dos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_weight="15"
+        android:gravity="top|center"
+        android:text=""
+        android:textColor="@color/logo_color"
+        android:textSize="@dimen/logo_size"
+        android:textStyle="bold"></TextView>
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/logo_color"
+        android:onClick="returnReply"
+        android:text="GO REGISTER"
+        android:textSize="20dp"
+        android:textColor="@color/red"
+        android:shadowColor="@color/black"
+        android:shadowDy="3"
+        android:shadowDx="3" />
+
+</LinearLayout>
