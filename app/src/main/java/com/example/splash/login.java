@@ -93,6 +93,7 @@ public class login extends AppCompatActivity {
             Boolean loginSuccessful = checkCredentials(c, userLogin, passLogin);
             if(loginSuccessful == true){
                 Intent intent = new Intent(this, Menu.class);
+                intent.putExtra(MyOpenHelper.KEY_USER, userLogin);
                 //meter extra con el user que se logea
                 startActivity(intent);
             }

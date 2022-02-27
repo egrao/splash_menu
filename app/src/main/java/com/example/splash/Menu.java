@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,11 +20,16 @@ public class Menu extends AppCompatActivity {
     private ListView listview;
     private ArrayList<String> menuItems;
     public static final String EXTRA_MESSAGE = "com.example.splash.MESSAGE";
+    public String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        Toast.makeText(Menu.this, "BIENVENIDO "+user, Toast.LENGTH_SHORT).show();
 
         listview = (ListView) findViewById(R.id.listview);
 

@@ -22,6 +22,7 @@ public class game2048 extends AppCompatActivity {
     private GridLayout grid;
     private LinearLayout ScoreBestLinear;
     TextView scoreHolder;
+    private Integer copiedScore;
     private Integer randomFila;
     private Integer randomColumn;
     private Integer random100;
@@ -246,22 +247,24 @@ public class game2048 extends AppCompatActivity {
 
     public void newCell(Button[][] cells){
         int cont = 0;
+        Boolean avaibleCell = checkEmptyCells();
         randomFila = new Random().nextInt(4);
         randomColumn = new Random().nextInt(4);
         random100 = new Random().nextInt(101);
+
 
         do {
             randomFila = new Random().nextInt(4);
             randomColumn = new Random().nextInt(4);
             cont++;
-        }while(!cells[randomFila][randomColumn].getText().equals("") && cont<500);
+        }while(!cells[randomFila][randomColumn].getText().equals("") && avaibleCell == true);
 
-        if (random100 <= 90 && cont<500) {
+        if (random100 <= 90 && avaibleCell == true) {
 
             cells[randomFila][randomColumn].setText(String.valueOf(2));
             cells[randomFila][randomColumn].setBackgroundColor(paintCell(String.valueOf(2))); //pintamos
 
-        }else if (random100>90 && cont<500){
+        }else if (random100>90 && avaibleCell == true){
 
             cells[randomFila][randomColumn].setText(String.valueOf(4));
             cells[randomFila][randomColumn].setBackgroundColor(paintCell(String.valueOf(4))); //pintamos
@@ -272,6 +275,7 @@ public class game2048 extends AppCompatActivity {
 
     public void flingRight(){
         copiedBoard = copyBoard(cells);
+        copiedScore = Integer.parseInt(scoreHolder.getText().toString());
         for (int i=0; i<4;i++){
             checkRight(i, cells);
             addRight(i, cells);
@@ -289,6 +293,7 @@ public class game2048 extends AppCompatActivity {
 
     public void flingLeft(){
         copiedBoard = copyBoard(cells);
+        copiedScore = Integer.parseInt(scoreHolder.getText().toString());
         for (int i=0; i<4;i++){
             checkLeft(i, cells);
             addLeft(i, cells);
@@ -305,6 +310,7 @@ public class game2048 extends AppCompatActivity {
 
     public void flingUp(){
         copiedBoard = copyBoard(cells);
+        copiedScore = Integer.parseInt(scoreHolder.getText().toString());
         for (int i=0; i<4;i++){
             checkUp(i, cells);
             addUp(i, cells);
@@ -321,6 +327,7 @@ public class game2048 extends AppCompatActivity {
 
     public void flingDown(){
         copiedBoard = copyBoard(cells);
+        copiedScore = Integer.parseInt(scoreHolder.getText().toString());
         for (int i=0; i<4;i++){
             checkDown(i, cells);
             addDown(i, cells);
@@ -535,6 +542,7 @@ public class game2048 extends AppCompatActivity {
 
     public void undoButton2048(View view) {
         repaintBoard(copiedBoard);
+        score = copiedScore;
         setScore(0);
         win = false;
     }

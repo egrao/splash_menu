@@ -14,8 +14,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     private static final String TAG = MyOpenHelper.class.getSimpleName();
 
-    // Declaring all these as constants makes code a lot more readable and looking like SQL.
-
     // Version has to be 1 first time or app will crash.
     private static final int DATABASE_VERSION = 1;
     private static final String REGISTERED_USERS_TABLE = "users";
@@ -227,8 +225,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getUser(String user) {
-
-//        String[] strings = new String[2];
         Cursor c = null;
         try {
             if (mReadableDB == null) {
@@ -237,25 +233,23 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
             String[] params = new String[]{user};
             c = mReadableDB.rawQuery("SELECT * FROM users WHERE user = ?", params);
-
-            if (c != null && c.getCount() > 0) {
-//                c.moveToFirst();
-//                do {
-//                    System.out.println("liturgia count "+String.valueOf(c.getCount()));
-//                    String user = c.getString(c.getColumnIndexOrThrow("user"));
-//                    String pass = c.getString(c.getColumnIndexOrThrow("pass"));
-//                    System.out.println("liturgia user"+user);
-//                    System.out.println("liturgia user"+pass);
-//                    strings[0] = user;
-//                    strings[1] = pass;
-//                } while (c.moveToNext());
-            }
-            mWritableDB.execSQL("DELETE FROM users");
+//        String[] strings = new String[2];
+//            if (c != null && c.getCount() > 0) {
+////                c.moveToFirst();
+////                do {
+////                    System.out.println("liturgia count "+String.valueOf(c.getCount()));
+////                    String user = c.getString(c.getColumnIndexOrThrow("user"));
+////                    String pass = c.getString(c.getColumnIndexOrThrow("pass"));
+////                    System.out.println("liturgia user"+user);
+////                    System.out.println("liturgia user"+pass);
+////                    strings[0] = user;
+////                    strings[1] = pass;
+////                } while (c.moveToNext());
+//            }
+//            mWritableDB.execSQL("DELETE FROM users");
 //            c.close();
         } catch (Exception e) {
             Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
-
-
         }
         return c;
     }
