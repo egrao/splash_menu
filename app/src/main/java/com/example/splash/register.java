@@ -63,7 +63,7 @@ public class register extends AppCompatActivity {
         String user = mEditUserView.getText().toString();
         String pass = mEditPassView.getText().toString();
 
-        exists = mDB.search(user);
+        exists = mDB.search(user, MyOpenHelper.KEY_USER);
 
         if(exists == false){
             Intent replyIntent = new Intent();

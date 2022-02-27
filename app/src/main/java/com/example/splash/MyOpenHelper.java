@@ -58,6 +58,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(REGISTERED_USERS_TABLE_CREATE);
+//        mWritableDB.execSQL("DELETE FROM users");
 //        fillDatabaseWithData(db);
     }
 
@@ -78,10 +79,10 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        }
 //    }
 
-    public Boolean search(String searchString) {
+    public Boolean search(String searchString, String attribute) {
         Boolean exists = false;
-        String[] columns = new String[]{KEY_USER};
-        String where =  KEY_USER + " = ?";
+        String[] columns = new String[]{attribute};
+        String where =  attribute + " = ?";
 //        searchString = "%" + searchString + "%";
         String[] whereArgs = new String[]{searchString};
 
@@ -225,37 +226,38 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        return deleted;
     }
 
-    public String[] getUser() {
+    public Cursor getUser(String user) {
 
-        String[] strings = new String[2];
+//        String[] strings = new String[2];
+        Cursor c = null;
         try {
             if (mReadableDB == null) {
                 mReadableDB = getReadableDatabase();
             }
 
-            String[] params = new String[]{"pepe"};
-            Cursor c = mReadableDB.rawQuery("SELECT * FROM users WHERE user = ?", params);
+            String[] params = new String[]{user};
+            c = mReadableDB.rawQuery("SELECT * FROM users WHERE user = ?", params);
 
             if (c != null && c.getCount() > 0) {
-                c.moveToFirst();
-                do {
-                    System.out.println("liturgia count "+String.valueOf(c.getCount()));
-                    String user = c.getString(c.getColumnIndexOrThrow("user"));
-                    String pass = c.getString(c.getColumnIndexOrThrow("pass"));
-                    System.out.println("liturgia user"+user);
-                    System.out.println("liturgia user"+pass);
-                    strings[0] = user;
-                    strings[1] = pass;
-                } while (c.moveToNext());
+//                c.moveToFirst();
+//                do {
+//                    System.out.println("liturgia count "+String.valueOf(c.getCount()));
+//                    String user = c.getString(c.getColumnIndexOrThrow("user"));
+//                    String pass = c.getString(c.getColumnIndexOrThrow("pass"));
+//                    System.out.println("liturgia user"+user);
+//                    System.out.println("liturgia user"+pass);
+//                    strings[0] = user;
+//                    strings[1] = pass;
+//                } while (c.moveToNext());
             }
             mWritableDB.execSQL("DELETE FROM users");
-            c.close();
+//            c.close();
         } catch (Exception e) {
             Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
 
 
         }
-        return strings;
+        return c;
     }
 
 

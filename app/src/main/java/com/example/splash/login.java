@@ -3,6 +3,7 @@ package com.example.splash;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +18,8 @@ public class login extends AppCompatActivity {
 
     public static final int REGISTER = 1;
     private MyOpenHelper mDB;
+    private EditText mEditUserView;
+    private EditText mEditPassView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,8 @@ public class login extends AppCompatActivity {
         //////COSAS////////
 
         mDB = new MyOpenHelper(this);
-
+        mEditUserView = (EditText) findViewById(R.id.login_username);
+        mEditPassView = (EditText) findViewById(R.id.login_pass);
 //        boton para añadir, seria el register que te manda a la ventana para nuevo usuario
         Button fab = (Button) findViewById(R.id.button_register);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +70,11 @@ public class login extends AppCompatActivity {
             }
 //            hacer otro if para result cancelled cuando el search dice que ya se ha encontrado el user si
 //                    quiero controlarlo desde esta actividad, si no pues hacerlo en el propio act de register
-            String [] aux = mDB.getUser();
-            TextView aux1 = (TextView) findViewById(R.id.uno);
-            TextView aux2 = (TextView) findViewById(R.id.dos);
-            aux1.setText(aux[0]);
-            aux2.setText(aux[1]);
+//            String [] aux = mDB.getUser();
+//            TextView aux1 = (TextView) findViewById(R.id.uno);
+//            TextView aux2 = (TextView) findViewById(R.id.dos);
+//            aux1.setText(aux[0]);
+//            aux2.setText(aux[1]);
 //            Boolean aux9 = mDB.search("pepe");
 //            if (aux9 == true){
 //                Toast.makeText(login.this, "WORKING AS INTEnDED", Toast.LENGTH_SHORT).show();
@@ -78,8 +82,51 @@ public class login extends AppCompatActivity {
         }
     }
 
+
+
     public void login(View view) {
-        Toast.makeText(login.this, "soonTM", Toast.LENGTH_SHORT).show();
+        String userLogin = mEditUserView.getText().toString();
+        String passLogin = mEditPassView.getText().toString();
+
+        Cursor c = mDB.getUser(userLogin);
+        if (c != null && c.getCount() > 0) {
+            Boolean loginSuccessful = checkCredentials(c, userLogin, passLogin);
+            if(loginSuccessful == true){
+                Intent intent = new Intent(this, Menu.class);
+                //meter extra con el user que se logea
+                startActivity(intent);
+            }
+            else{
+                mEditUserView.setText("");
+                mEditPassView.setText("");
+                Toast.makeText(login.this, "Contraseña incorrecta. Te queda 1 intento", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            mEditUserView.setText("");
+            mEditPassView.setText("");
+            Toast.makeText(login.this, "Usuario incorrecto o no existe", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public Boolean checkCredentials(Cursor c, String user, String password){
+        c.moveToFirst();
+
+        String auxUser = c.getString(c.getColumnIndexOrThrow(MyOpenHelper.KEY_USER));
+        String auxPass = c.getString(c.getColumnIndexOrThrow(MyOpenHelper.KEY_PASS));
+        System.out.println("liturgia "+auxUser);
+        System.out.println("liturgia "+auxPass);
+        System.out.println("liturgia editv user "+ user);
+        System.out.println("liturgia editv pass "+ password);
+
+        if(auxUser.equals(user) && auxPass.equals(password)){
+            System.out.println("liturgia pene");
+            c.close();
+            mDB.getWritableDatabase().execSQL("DELETE FROM users");
+            return true;
+        }
+        c.close();
+        return false;
     }
 
 }
