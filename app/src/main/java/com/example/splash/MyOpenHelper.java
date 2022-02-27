@@ -10,9 +10,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Open helper for the list of words database.
- */
 public class MyOpenHelper extends SQLiteOpenHelper {
 
     private static final String TAG = MyOpenHelper.class.getSimpleName();
@@ -81,23 +78,34 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        }
 //    }
 
-//    public Cursor search(String searchString) {
-//        String[] columns = new String[]{KEY_WORD};
-//        String where =  KEY_WORD + " LIKE ?";
+    public Boolean search(String searchString) {
+        Boolean exists = false;
+        String[] columns = new String[]{KEY_USER};
+        String where =  KEY_USER + " = ?";
 //        searchString = "%" + searchString + "%";
-//        String[] whereArgs = new String[]{searchString};
-//
-//        Cursor cursor = null;
-//        try {
-//            if (mReadableDB == null) {
-//                mReadableDB = getReadableDatabase();
-//            }
-//            cursor = mReadableDB.query(REGISTERED_USERS_TABLE, columns, where, whereArgs, null, null, null);
-//        } catch (Exception e) {
-//            Log.d(TAG, "SEARCH EXCEPTION! " + e); // Just log the exception
-//        }
-//        return cursor;
-//    }
+        String[] whereArgs = new String[]{searchString};
+
+        Cursor c = null;
+        try {
+            if (mReadableDB == null) {
+                mReadableDB = getReadableDatabase();
+            }
+            c = mReadableDB.query(REGISTERED_USERS_TABLE, columns, where, whereArgs, null, null, null);
+
+            if (c != null && c.getCount() > 0) {
+                exists = true;
+            }
+
+            else{
+                return exists;
+            }
+            c.close();
+
+        } catch (Exception e) {
+            Log.d(TAG, "SEARCH EXCEPTION! " + e); // Just log the exception
+        }
+        return exists;
+    }
 
 
     //    public WordItem query(int position) {

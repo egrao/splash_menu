@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,9 +15,11 @@ public class register extends AppCompatActivity {
 //    private static final int NO_ID = -99;
 //    private static final String NO_WORD = "";
 
-    private EditText mEditWordView;
+//    private EditText mEditWordView;
+    private MyOpenHelper mDB;
     private EditText mEditUserView;
     private EditText mEditPassView;
+    Boolean exists;
 
     // Unique tag for the intent reply.
     public static final String EXTRA_REPLY1 = "com.example.splash.REPLY1";
@@ -29,6 +32,7 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mDB = new MyOpenHelper(this);
         mEditUserView = (EditText) findViewById(R.id.edit_username);
         mEditPassView = (EditText) findViewById(R.id.edit_pass);
 //        mEditWordView = (EditText) findViewById(R.id.edit_word);
@@ -48,20 +52,33 @@ public class register extends AppCompatActivity {
 //        } // Otherwise, start with empty fields.
     }
 
+
     /* *
      * Click handler for the Save button.
      *  Creates a new intent for the reply, adds the reply message to it as an extra,
      *  sets the intent result, and closes the activity.
      */
     public void returnReply(View view) {
-        String user = ((EditText) findViewById(R.id.edit_username)).getText().toString();
-        String pass = ((EditText) findViewById(R.id.edit_pass)).getText().toString();
 
-        Intent replyIntent = new Intent();
-        replyIntent.putExtra(EXTRA_REPLY1, user);
-        replyIntent.putExtra(EXTRA_REPLY2, pass);
+        String user = mEditUserView.getText().toString();
+        String pass = mEditPassView.getText().toString();
+
+        exists = mDB.search(user);
+
+        if(exists == false){
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra(EXTRA_REPLY1, user);
+            replyIntent.putExtra(EXTRA_REPLY2, pass);
 //        replyIntent.putExtra(WordListAdapter.EXTRA_ID, mId);
-        setResult(RESULT_OK, replyIntent);
-        finish();
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        }
+        else{
+            mEditUserView.setText("");
+            mEditPassView.setText("");
+            Toast.makeText(register.this, "Usuario en uso, pruebe de nuevo", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

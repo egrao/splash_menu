@@ -60,16 +60,26 @@ public class login extends AppCompatActivity {
                 } else {
                     Toast.makeText(
                             getApplicationContext(),
-                            "no se ha añadido nada uwu",
+                            "campos vacios",
                             Toast.LENGTH_LONG).show();
                 }
             }
+//            hacer otro if para result cancelled cuando el search dice que ya se ha encontrado el user si
+//                    quiero controlarlo desde esta actividad, si no pues hacerlo en el propio act de register
             String [] aux = mDB.getUser();
             TextView aux1 = (TextView) findViewById(R.id.uno);
             TextView aux2 = (TextView) findViewById(R.id.dos);
             aux1.setText(aux[0]);
             aux2.setText(aux[1]);
+//            Boolean aux9 = mDB.search("pepe");
+//            if (aux9 == true){
+//                Toast.makeText(login.this, "WORKING AS INTEnDED", Toast.LENGTH_SHORT).show();
+//            }
         }
+    }
+
+    public void login(View view) {
+        Toast.makeText(login.this, "soonTM", Toast.LENGTH_SHORT).show();
     }
 
 }
