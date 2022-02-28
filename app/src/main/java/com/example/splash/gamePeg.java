@@ -90,7 +90,7 @@ public class gamePeg extends AppCompatActivity {
 
                         else if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(emptyPiece)) {
 //                            copyBoard(pieces, copiedMatrix);
-//                            Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(gamePeg.this, "SIKEE", Toast.LENGTH_SHORT).show();
 //                            repaintBoard(copiedMatrix);
                         }
 
