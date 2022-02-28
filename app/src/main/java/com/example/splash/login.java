@@ -55,7 +55,7 @@ public class login extends AppCompatActivity {
 //                    int id = data.getIntExtra(WordListAdapter.EXTRA_ID, -99);
 
 //                    if (id == WORD_ADD) {
-                        mDB.insert(user, pass, null, null, null, null);
+                        mDB.insert(user, pass);
 //                    } else if (id >= 0) {
 //                        mDB.update(id, word);
 //                    }
@@ -88,7 +88,7 @@ public class login extends AppCompatActivity {
         String userLogin = mEditUserView.getText().toString();
         String passLogin = mEditPassView.getText().toString();
 
-        Cursor c = mDB.getUser(userLogin);
+        Cursor c = mDB.getUserInfo(userLogin, "users");
         if (c != null && c.getCount() > 0) {
             Boolean loginSuccessful = checkCredentials(c, userLogin, passLogin);
             if(loginSuccessful == true){
@@ -96,6 +96,7 @@ public class login extends AppCompatActivity {
                 intent.putExtra(MyOpenHelper.KEY_USER, userLogin);
                 //meter extra con el user que se logea
                 startActivity(intent);
+                login.this.finish();
             }
             else{
                 mEditUserView.setText("");
@@ -123,7 +124,7 @@ public class login extends AppCompatActivity {
         if(auxUser.equals(user) && auxPass.equals(password)){
             System.out.println("liturgia pene");
             c.close();
-            mDB.getWritableDatabase().execSQL("DELETE FROM users");
+//            mDB.getWritableDatabase().execSQL("DELETE FROM users");
             return true;
         }
         c.close();

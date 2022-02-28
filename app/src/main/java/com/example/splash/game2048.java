@@ -2,6 +2,7 @@ package com.example.splash;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,9 +11,8 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.Chronometer;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -21,13 +21,15 @@ public class game2048 extends AppCompatActivity {
     private GestureDetector mDetector;
     private GridLayout grid;
     private LinearLayout ScoreBestLinear;
-    TextView scoreHolder;
+    private TextView scoreHolder;
+    private TextView bestScoreHolder;
+    private Chronometer mChronometer;
     private Integer copiedScore;
     private Integer randomFila;
     private Integer randomColumn;
     private Integer random100;
     private Integer score;
-    private Integer scoreUndo;
+    private String timer2048;
 
     private boolean emptyCells;
     private boolean gameOver;
@@ -44,10 +46,10 @@ public class game2048 extends AppCompatActivity {
         setContentView(R.layout.activity_game2048);
 /////////////////////COSAS/////////////////
         grid = findViewById(R.id.Grid);
-        ScoreBestLinear = findViewById(R.id.ScoreBestId);
         mDetector = new GestureDetector(this, new GestureListener());
-        scoreHolder = (TextView) ScoreBestLinear.getChildAt(0);
-
+        mChronometer = (Chronometer) findViewById(R.id.chronometer);
+        scoreHolder = (TextView) findViewById(R.id.score2048);
+        bestScoreHolder = (TextView) findViewById(R.id.best_score2048);
         score = 0;
         gameOver = false;
         win = false;
@@ -55,6 +57,9 @@ public class game2048 extends AppCompatActivity {
         arrayButtons(cells);
         initialBoard = copyBoard(cells);
         board();
+        mChronometer.setBase(SystemClock.elapsedRealtime());
+        mChronometer.start();
+
         copiedBoard = copyBoard(cells);
 //        cells[0][1].setBackgroundColor(paintCell(String.valueOf(1024)));
 //        cells[0][2].setBackgroundColor(paintCell(String.valueOf(1024)));
@@ -234,6 +239,8 @@ public class game2048 extends AppCompatActivity {
         }
         System.out.println("gameover "+gameOver);
         if (gameOver == true) {
+            score = Integer.parseInt(scoreHolder.getText().toString());
+            timer2048 = mChronometer.getText().toString();
             Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
         }
 
@@ -241,6 +248,8 @@ public class game2048 extends AppCompatActivity {
 
     public void checkWin(){
         if(win == true){
+            score = Integer.parseInt(scoreHolder.getText().toString());
+            timer2048 = mChronometer.getText().toString();
             Toast.makeText(game2048.this, "SUCCESFULLY INVADED UKRANIA", Toast.LENGTH_SHORT).show();
         }
     }
@@ -555,5 +564,7 @@ public class game2048 extends AppCompatActivity {
         repaintBoard(initialBoard);
         setScore(score);
         board();
+        mChronometer.setBase(SystemClock.elapsedRealtime());
+        mChronometer.start();
     }
 }

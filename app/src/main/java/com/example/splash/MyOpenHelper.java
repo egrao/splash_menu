@@ -17,32 +17,38 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     // Version has to be 1 first time or app will crash.
     private static final int DATABASE_VERSION = 1;
     private static final String REGISTERED_USERS_TABLE = "users";
+    private static final String SCORES_TABLE = "scores";
     private static final String DATABASE_NAME = "registered users";
 
     // Column names...
     public static final String KEY_ID = "_id";
     public static final String KEY_USER = "user";
     public static final String KEY_PASS = "pass";
-    public static final String KEY_HSCOREPEG = "_hscorepeg";
-    public static final String KEY_PEGTIMER = "_pegtimer";
-    public static final String KEY_HSCORE2048 = "_hscore2048";
-    public static final String KEY_2048TIMER = "_2048timer";
+//    public static final String KEY_HSCOREPEG = "_hscorepeg";
+//    public static final String KEY_PEGTIMER = "_pegtimer";
+//    public static final String KEY_HSCORE2048 = "_hscore2048";
+//    public static final String KEY_2048TIMER = "_2048timer";
+
+    public static final String KEY_SCORE = "_score";
+    public static final String KEY_TIME = "time";
+    public static final String KEY_GAME = "game";
+
 
     // ... and a string array of columns.
     private static final String[] COLUMNS =
-            {KEY_ID, KEY_USER, KEY_PASS, KEY_HSCOREPEG, KEY_PEGTIMER, KEY_HSCORE2048, KEY_2048TIMER};
+            {KEY_USER, KEY_PASS};
+
+    private static final String[] COLUMNS2 =
+            {KEY_SCORE, KEY_TIME, KEY_GAME, KEY_USER};
 
     // Build the SQL query that creates the table.
     private static final String REGISTERED_USERS_TABLE_CREATE =
             "CREATE TABLE " + REGISTERED_USERS_TABLE + " (" +
-                    KEY_ID + " INTEGER PRIMARY KEY, " + // will auto-increment if no value passed
-                    KEY_USER + " TEXT, " + KEY_PASS + " TEXT, " + KEY_HSCOREPEG + " INTEGER, " + KEY_PEGTIMER +
-                    " REAL, " + KEY_HSCORE2048 + " INTEGER, " + KEY_2048TIMER + " REAL );";
+                    KEY_USER + " TEXT PRIMARY KEY, " + KEY_PASS + " TEXT );";
 
-
-//                "CREATE TABLE " + REGISTERED_USERS_TABLE + " (" +
-//    KEY_ID + " INTEGER PRIMARY KEY, " + // will auto-increment if no value passed
-//    KEY_USER + " TEXT );";
+    private static final String SCORES_TABLE_CREATE =
+            "CREATE TABLE " + SCORES_TABLE + " (" +
+                    KEY_SCORE + " INTEGER, " + KEY_TIME + " TEXT, " + KEY_GAME + " TEXT, " + KEY_USER + " TEXT );";
 
 
     private SQLiteDatabase mWritableDB;
@@ -55,7 +61,9 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("ddbb");
         db.execSQL(REGISTERED_USERS_TABLE_CREATE);
+        db.execSQL(SCORES_TABLE_CREATE);
 //        mWritableDB.execSQL("DELETE FROM users");
 //        fillDatabaseWithData(db);
     }
@@ -145,25 +153,22 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //      @param  user New word.
 //      @return The id of the inserted word.
 //
-    public void insert(String user, String pass, Integer hscorepeg, Double pegtimer, Integer hscore2048, Double timer2048) {
-//        long newId = 0;
+    public void insert(String user, String pass) {
         ContentValues values = new ContentValues();
         values.put(KEY_USER, user);
         values.put(KEY_PASS, pass);
-        values.put(KEY_HSCOREPEG, hscorepeg);
-        values.put(KEY_PEGTIMER, pegtimer);
-        values.put(KEY_HSCORE2048, hscore2048);
-        values.put(KEY_2048TIMER, timer2048);
+//        values.put(KEY_HSCOREPEG, hscorepeg);
+//        values.put(KEY_PEGTIMER, pegtimer);
+//        values.put(KEY_HSCORE2048, hscore2048);
+//        values.put(KEY_2048TIMER, timer2048);
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
             }
             mWritableDB.insert(REGISTERED_USERS_TABLE, null, values);
-//            newId = mWritableDB.insert(REGISTERED_USERS_TABLE, null, values);
         } catch (Exception e) {
             Log.d(TAG, "INSERT EXCEPTION! " + e);
         }
-//        return newId;
     }
 
     /**
@@ -173,7 +178,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
      * @param user The new value of the word.
      * @return the number of rows affected or -1 of nothing was updated.
      */
-    public void update(int id, String user, String pass, Integer hscorepeg, Double pegtimer, Integer hscore2048, Double timer2048) {
+    public void update(int id, String user, String pass) {
 //        int mNumberOfRowsUpdated = -1;
         try {
             if (mWritableDB == null) {
@@ -182,10 +187,10 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_USER, user);
             values.put(KEY_PASS, pass);
-            values.put(KEY_HSCOREPEG, hscorepeg);
-            values.put(KEY_PEGTIMER, pegtimer);
-            values.put(KEY_HSCORE2048, hscore2048);
-            values.put(KEY_2048TIMER, timer2048);
+//            values.put(KEY_HSCOREPEG, hscorepeg);
+//            values.put(KEY_PEGTIMER, pegtimer);
+//            values.put(KEY_HSCORE2048, hscore2048);
+//            values.put(KEY_2048TIMER, timer2048);
 
             mWritableDB.update(REGISTERED_USERS_TABLE, //table to change
                     values, // new values to insert
@@ -224,7 +229,8 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        return deleted;
     }
 
-    public Cursor getUser(String user) {
+    public Cursor getUserInfo(String user, String table) {
+        String query = "SELECT * FROM "+table+" WHERE user = ?";
         Cursor c = null;
         try {
             if (mReadableDB == null) {
@@ -232,7 +238,8 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             }
 
             String[] params = new String[]{user};
-            c = mReadableDB.rawQuery("SELECT * FROM users WHERE user = ?", params);
+//            c = mReadableDB.rawQuery("SELECT * FROM users WHERE user = ?", params);
+            c = mReadableDB.rawQuery(query, params);
 //        String[] strings = new String[2];
 //            if (c != null && c.getCount() > 0) {
 ////                c.moveToFirst();
@@ -257,10 +264,12 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        System.out.println("bbdd reseteada");
         Log.w(MyOpenHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + REGISTERED_USERS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SCORES_TABLE);
         onCreate(db);
     }
 }

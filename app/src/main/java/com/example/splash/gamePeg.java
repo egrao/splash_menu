@@ -3,8 +3,10 @@ package com.example.splash;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,11 @@ public class gamePeg extends AppCompatActivity {
     private Drawable[][] copiedMatrix = new Drawable [7][7];
     private boolean gameOver;
     private boolean win;
+    private Integer score;
+    private String timerPeg;
+    private Chronometer mChronometer;
+    private TextView scoreHolder;
+    private long elapsedMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +42,16 @@ public class gamePeg extends AppCompatActivity {
         setContentView(R.layout.activity_game_peg);
 
         /////////////////////COSAS/////////////////////////
-
+        mChronometer = (Chronometer) findViewById(R.id.chronometerPeg);
+        scoreHolder = (TextView) findViewById(R.id.scorePeg);
+        score = 0;
         gameOver = false;
         win = false;
         piecesConstantState();
         arrayButtons();
+
+        mChronometer.setBase(SystemClock.elapsedRealtime());
+        mChronometer.start();
         //copying initial position into 2 arrays
         copyBoard(pieces, initialMatrix);
         copyBoard(pieces, copiedMatrix);
@@ -68,7 +80,7 @@ public class gamePeg extends AppCompatActivity {
 
                         if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(basePiece)) {
 //                                Toast.makeText(gamePeg.this, "normal", Toast.LENGTH_SHORT).show();
-                            copyBoard(pieces, copiedMatrix);
+//                            copyBoard(pieces, copiedMatrix);
                             lastClicked = justClicked;
                             lastFila = aux2;
                             lastColumna = aux3;
@@ -78,7 +90,7 @@ public class gamePeg extends AppCompatActivity {
 
                         else if (lastClicked == null && (justClicked.getBackground().getConstantState()).equals(emptyPiece)) {
 //                            copyBoard(pieces, copiedMatrix);
-                            Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(gamePeg.this, "SIKE", Toast.LENGTH_SHORT).show();
 //                            repaintBoard(copiedMatrix);
                         }
 
@@ -90,6 +102,10 @@ public class gamePeg extends AppCompatActivity {
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2][aux3-1].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            score = Integer.parseInt(scoreHolder.getText().toString());
+                            Integer points = calcPoints();
+                            elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+                            setScore(points);
                             lastClicked = null;
                             checkGameOver();
                         }
@@ -102,6 +118,10 @@ public class gamePeg extends AppCompatActivity {
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2][aux3+1].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            score = Integer.parseInt(scoreHolder.getText().toString());
+                            Integer points = calcPoints();
+                            elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+                            setScore(points);
                             lastClicked = null;
                             checkGameOver();
 
@@ -115,6 +135,10 @@ public class gamePeg extends AppCompatActivity {
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2+1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            score = Integer.parseInt(scoreHolder.getText().toString());
+                            Integer points = calcPoints();
+                            elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+                            setScore(points);
                             lastClicked = null;
                             checkGameOver();
 
@@ -127,6 +151,10 @@ public class gamePeg extends AppCompatActivity {
                             lastClicked.setBackgroundResource(R.drawable.peg_empty_piece);
                             pieces[aux2-1][aux3].setBackgroundResource(R.drawable.peg_empty_piece);
                             justClicked.setBackgroundResource(R.drawable.peg_base_piece);
+                            score = Integer.parseInt(scoreHolder.getText().toString());
+                            Integer points = calcPoints();
+                            elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+                            setScore(points);
                             lastClicked = null;
                             checkGameOver();
                         }
@@ -139,7 +167,7 @@ public class gamePeg extends AppCompatActivity {
 
                             else {
 //                                    Toast.makeText(gamePeg.this, "entramos", Toast.LENGTH_SHORT).show();
-                                copyBoard(pieces, copiedMatrix);
+//                                copyBoard(pieces, copiedMatrix);
                                 lastClicked.setBackgroundResource(R.drawable.peg_base_piece);
                                 lastFila = aux2;
                                 lastColumna = aux3;
@@ -179,16 +207,26 @@ public class gamePeg extends AppCompatActivity {
         lastClicked = null;
     }
 
-    public void undoButton(View view) {
-        repaintBoard(copiedMatrix);
+    public void setScore(Integer points){
+        int newScore = score + points;
+        scoreHolder.setText(String.valueOf(newScore));
     }
 
-    public void restartButton(View view) {
-//        copyBoard(initialMatrix, copiedMatrix);
-        repaintBoard(initialMatrix);
+    public void setScoreRestart(){
+        int newScore = 0;
+        score = Integer.parseInt(scoreHolder.getText().toString());
+        scoreHolder.setText(String.valueOf(newScore));
     }
 
-
+    public Integer calcPoints(){
+        long aux =(SystemClock.elapsedRealtime() - mChronometer.getBase()) - elapsedMillis;
+        int seconds = (int) ((aux / 1000) % 60);
+        int points = 10-seconds;
+        if(points<0){
+            points = 0;
+        }
+        return points;
+    }
 
     public boolean checkWin(){
         int cont = 0;
@@ -453,13 +491,37 @@ public class gamePeg extends AppCompatActivity {
         win = checkWin();
         if(gameOver == true){
             if(win == true){
+                score = Integer.parseInt(scoreHolder.getText().toString());
+                timerPeg = mChronometer.getText().toString();
                 Toast.makeText(gamePeg.this, "WINNER DINNER", Toast.LENGTH_SHORT).show();
             }
             else{
-            Toast.makeText(gamePeg.this, "Game Over bois", Toast.LENGTH_SHORT).show();
-            System.out.println("Game Over bois pack it up");
+                score = Integer.parseInt(scoreHolder.getText().toString());
+                timerPeg = mChronometer.getText().toString();
+                Toast.makeText(gamePeg.this, "Game Over bois", Toast.LENGTH_SHORT).show();
+                System.out.println("Game Over bois pack it up");
             }
         }
+    }
+
+    public void undoButton(View view) {
+        elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+//        long minutes = (elapsedMillis / 1000) / 60;
+//        long seconds = (elapsedMillis / 1000) % 60;
+//        System.out.println(minutes+" minutos " + seconds + " segundos " + "uwu "+elapsedMillis/1000);
+        setScore(0);
+        repaintBoard(copiedMatrix);
+    }
+
+    public void restartButton(View view) {
+//        copyBoard(initialMatrix, copiedMatrix);
+        repaintBoard(initialMatrix);
+//        score = 0;
+//        setScore(0);
+        setScoreRestart();
+        mChronometer.setBase(SystemClock.elapsedRealtime());
+        mChronometer.start();
+        elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
     }
 
 //    View.OnClickListener myhandler1 = new View.OnClickListener() {

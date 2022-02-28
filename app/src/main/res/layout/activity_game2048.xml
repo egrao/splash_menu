@@ -14,32 +14,49 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:layout_marginRight="280dp"/>
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
-        android:id="@+id/ScoreBestId"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="-30dp"
+        android:background="#b6a5a5"
+        android:orientation="vertical">
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            tools:ignore="RtlCompat" />
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginLeft="250dp"
         android:background="#b6a5a5"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/score2048"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="0"
             android:textSize="30dp"
+            android:gravity="center_vertical"
             android:textAlignment="center"
-            android:onClick="undoButton2048"
-            />
+            tools:ignore="RtlCompat" />
         <TextView
+            android:id="@+id/best_score2048"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="0"
             android:textSize="30dp"
+            android:gravity="center_vertical"
             android:textAlignment="center"
-            android:onClick="restartButton2048"
-            />
+            tools:ignore="RtlCompat" />
+    </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -52,17 +69,18 @@
         <Button
             android:layout_width="@dimen/cell"
             android:layout_height="@dimen/cell"
-            android:text="U"
             android:background="#b6a5a5"
             android:onClick="undoButton2048"
-            />
+            android:text="U"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
         <Button
             android:layout_width="@dimen/cell"
             android:layout_height="@dimen/cell"
-            android:text="R"
             android:background="#b6a5a5"
             android:onClick="restartButton2048"
-            />
+            android:text="R"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 
     <GridLayout
