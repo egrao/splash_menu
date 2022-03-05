@@ -72,7 +72,7 @@ public class Menu extends AppCompatActivity {
                 }
 
                 if(position == 2){
-                    showItem2(arg1, scoreboard.class);
+                    showItem3(arg1, scoreboard.class);
                 }
 
 //                if(position == 3){
@@ -82,21 +82,23 @@ public class Menu extends AppCompatActivity {
             }
         });
     }
-    public void showItem1(View view, Class game) {
-        HScore = mDB.getHScore(user, "game2048");
-        System.out.println("insert desde fuera "+HScore);
-        showGame(game2048.class);
-    }
-    public void showItem2(View view, Class game) {
+
+    public void showItem1(View view, Class clase) {
         HScore = mDB.getHScore(user, "gamePeg");
         System.out.println("insert desde fuera "+HScore);
-        showGame(gamePeg.class);
+        showGame(clase);
     }
 
-    public void showItem3(View view, Class game) {
+    public void showItem2(View view, Class clase) {
         HScore = mDB.getHScore(user, "game2048");
-        System.out.println("insert desde fuera "+HScore);
-        showGame(game2048.class);
+        System.out.println("insert desde fuerax "+HScore);
+        showGame(clase);
+    }
+
+    public void showItem3(View view, Class clase) {
+        Intent intent = new Intent(this, clase);
+        intent.putExtra(MyOpenHelper.KEY_USER, user);
+        startActivity(intent);
     }
 
     public void showGame(Class game) {
@@ -124,6 +126,52 @@ public class Menu extends AppCompatActivity {
 //                }
             }
             else if (resultCode == RESULT_CANCELED){
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(2, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(5, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(20, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(69, "20:20", "game2048", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(800, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(900, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(2, "40:40", "gamePeg", user);
+
+
+
+
                 Toast.makeText(
                         getApplicationContext(),
                         "no hay hscore nuevo",

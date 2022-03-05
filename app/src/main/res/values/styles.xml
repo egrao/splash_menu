@@ -13,4 +13,8 @@
         <item name="android:gravity">center_horizontal|center_vertical</item>
     </style>
 
+        <style name="Time" parent="TextAppearance.AppCompat.Subhead"/>
+
+        <style name="Score" parent="TextAppearance.AppCompat.Headline"/>
+
 </resources>

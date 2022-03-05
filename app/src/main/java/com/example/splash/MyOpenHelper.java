@@ -275,6 +275,23 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    public Cursor getScoreC(String user, String game) {
+        String query = "SELECT * FROM "+SCORES_TABLE+" WHERE user = ? AND game = ? ORDER BY _score DESC";
+        Cursor c = null;
+        try {
+            if (mReadableDB == null) {
+                mReadableDB = getReadableDatabase();
+            }
+
+            String[] params = new String[]{user, game};
+            c = mReadableDB.rawQuery(query, params);
+
+        } catch (Exception e) {
+            Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
+        }
+        return c;
+    }
+
     public Integer getHScore(String user, String game){
         String query = "SELECT MAX(_score) as _score FROM "+SCORES_TABLE+" WHERE user = ? AND game = ? GROUP BY user";
         Integer HScore = 0;

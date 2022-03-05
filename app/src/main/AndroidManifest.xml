@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Splash" >
         <activity
             android:name=".scoreboard"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".register"
             android:exported="false"
