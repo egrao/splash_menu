@@ -1,5 +1,6 @@
 package com.example.splash;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.SQLOutput;
+
 public class gamePeg extends AppCompatActivity {
 
+    private static final String game = "gamePeg";
     private GridLayout grid;
     private Button button, button0;
     private Button lastClicked = null;
@@ -30,6 +34,7 @@ public class gamePeg extends AppCompatActivity {
     private Drawable[][] copiedMatrix = new Drawable [7][7];
     private boolean gameOver;
     private boolean win;
+    private Integer HScore;
     private Integer score;
     private String timerPeg;
     private Chronometer mChronometer;
@@ -42,6 +47,8 @@ public class gamePeg extends AppCompatActivity {
         setContentView(R.layout.activity_game_peg);
 
         /////////////////////COSAS/////////////////////////
+        Bundle extras = getIntent().getExtras();
+        HScore = extras.getInt("HScore");
         mChronometer = (Chronometer) findViewById(R.id.chronometerPeg);
         scoreHolder = (TextView) findViewById(R.id.scorePeg);
         score = 0;
@@ -494,12 +501,14 @@ public class gamePeg extends AppCompatActivity {
                 score = Integer.parseInt(scoreHolder.getText().toString());
                 timerPeg = mChronometer.getText().toString();
                 Toast.makeText(gamePeg.this, "WINNER DINNER", Toast.LENGTH_SHORT).show();
+                returnReply();
             }
             else{
                 score = Integer.parseInt(scoreHolder.getText().toString());
                 timerPeg = mChronometer.getText().toString();
                 Toast.makeText(gamePeg.this, "Game Over bois", Toast.LENGTH_SHORT).show();
                 System.out.println("Game Over bois pack it up");
+                returnReply();
             }
         }
     }
@@ -522,6 +531,21 @@ public class gamePeg extends AppCompatActivity {
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.start();
         elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
+    }
+
+    public void returnReply() {
+        if(score > HScore){
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra("score", String.valueOf(score));
+            replyIntent.putExtra("time", timerPeg);
+            replyIntent.putExtra("game", game);
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        }
+        else{
+            setResult(RESULT_CANCELED);
+            finish();
+        }
     }
 
 //    View.OnClickListener myhandler1 = new View.OnClickListener() {

@@ -24,10 +24,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public static final String KEY_ID = "_id";
     public static final String KEY_USER = "user";
     public static final String KEY_PASS = "pass";
-//    public static final String KEY_HSCOREPEG = "_hscorepeg";
-//    public static final String KEY_PEGTIMER = "_pegtimer";
-//    public static final String KEY_HSCORE2048 = "_hscore2048";
-//    public static final String KEY_2048TIMER = "_2048timer";
 
     public static final String KEY_SCORE = "_score";
     public static final String KEY_TIME = "time";
@@ -85,34 +81,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        }
 //    }
 
-    public Boolean search(String searchString, String attribute) {
-        Boolean exists = false;
-        String[] columns = new String[]{attribute};
-        String where =  attribute + " = ?";
-//        searchString = "%" + searchString + "%";
-        String[] whereArgs = new String[]{searchString};
 
-        Cursor c = null;
-        try {
-            if (mReadableDB == null) {
-                mReadableDB = getReadableDatabase();
-            }
-            c = mReadableDB.query(REGISTERED_USERS_TABLE, columns, where, whereArgs, null, null, null);
-
-            if (c != null && c.getCount() > 0) {
-                exists = true;
-            }
-
-            else{
-                return exists;
-            }
-            c.close();
-
-        } catch (Exception e) {
-            Log.d(TAG, "SEARCH EXCEPTION! " + e); // Just log the exception
-        }
-        return exists;
-    }
 
 
     //    public WordItem query(int position) {
@@ -166,6 +135,23 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 mWritableDB = getWritableDatabase();
             }
             mWritableDB.insert(REGISTERED_USERS_TABLE, null, values);
+        } catch (Exception e) {
+            Log.d(TAG, "INSERT EXCEPTION! " + e);
+        }
+    }
+
+    public void insertHScore(Integer score, String time, String game, String user) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_SCORE, score);
+        values.put(KEY_TIME, time);
+        values.put(KEY_GAME, game);
+        values.put(KEY_USER, user);
+
+        try {
+            if (mWritableDB == null) {
+                mWritableDB = getWritableDatabase();
+            }
+            mWritableDB.insert(SCORES_TABLE, null, values);
         } catch (Exception e) {
             Log.d(TAG, "INSERT EXCEPTION! " + e);
         }
@@ -229,6 +215,34 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        return deleted;
     }
 
+    public Boolean search(String searchString, String attribute) {
+        Boolean exists = false;
+        String[] columns = new String[]{attribute};
+        String where =  attribute + " = ?";
+        String[] whereArgs = new String[]{searchString};
+
+        Cursor c = null;
+        try {
+            if (mReadableDB == null) {
+                mReadableDB = getReadableDatabase();
+            }
+            c = mReadableDB.query(REGISTERED_USERS_TABLE, columns, where, whereArgs, null, null, null);
+
+            if (c != null && c.getCount() > 0) {
+                exists = true;
+            }
+
+            else{
+                return exists;
+            }
+            c.close();
+
+        } catch (Exception e) {
+            Log.d(TAG, "SEARCH EXCEPTION! " + e); // Just log the exception
+        }
+        return exists;
+    }
+
     public Cursor getUserInfo(String user, String table) {
         String query = "SELECT * FROM "+table+" WHERE user = ?";
         Cursor c = null;
@@ -259,6 +273,29 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
         }
         return c;
+    }
+
+    public Integer getHScore(String user, String game){
+        String query = "SELECT MAX(_score) as _score FROM "+SCORES_TABLE+" WHERE user = ? AND game = ? GROUP BY user";
+        Integer HScore = 0;
+        Cursor c = null;
+        try {
+            if (mReadableDB == null) {
+                mReadableDB = getReadableDatabase();
+            }
+
+            String[] params = new String[]{user, game};
+            c = mReadableDB.rawQuery(query, params);
+
+            if (c != null && c.getCount() > 0) {
+                c.moveToFirst();
+                HScore = c.getInt(c.getColumnIndexOrThrow(KEY_SCORE));
+            }
+            c.close();
+        } catch (Exception e) {
+            Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
+        }
+        return HScore;
     }
 
 

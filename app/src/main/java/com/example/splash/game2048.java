@@ -1,5 +1,6 @@
 package com.example.splash;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -18,6 +19,7 @@ import java.util.Random;
 
 public class game2048 extends AppCompatActivity {
 
+    private static final String game = "game2048";
     private GestureDetector mDetector;
     private GridLayout grid;
     private LinearLayout ScoreBestLinear;
@@ -29,6 +31,7 @@ public class game2048 extends AppCompatActivity {
     private Integer randomColumn;
     private Integer random100;
     private Integer score;
+    private Integer HScore;
     private String timer2048;
 
     private boolean emptyCells;
@@ -45,6 +48,9 @@ public class game2048 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game2048);
 /////////////////////COSAS/////////////////
+        Bundle extras = getIntent().getExtras();
+        HScore = extras.getInt("HScore");
+
         grid = findViewById(R.id.Grid);
         mDetector = new GestureDetector(this, new GestureListener());
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
@@ -237,11 +243,12 @@ public class game2048 extends AppCompatActivity {
         else{
             gameOver = false;
         }
-        System.out.println("gameover "+gameOver);
+
         if (gameOver == true) {
             score = Integer.parseInt(scoreHolder.getText().toString());
             timer2048 = mChronometer.getText().toString();
             Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+            returnReply();
         }
 
     }
@@ -250,7 +257,9 @@ public class game2048 extends AppCompatActivity {
         if(win == true){
             score = Integer.parseInt(scoreHolder.getText().toString());
             timer2048 = mChronometer.getText().toString();
-            Toast.makeText(game2048.this, "SUCCESFULLY INVADED UKRANIA", Toast.LENGTH_SHORT).show();
+            Toast.makeText(game2048.this, "WIN WIN WIN WIN", Toast.LENGTH_SHORT).show();
+            returnReply();
+
         }
     }
 
@@ -566,5 +575,20 @@ public class game2048 extends AppCompatActivity {
         board();
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.start();
+    }
+
+    public void returnReply() {
+        if(score > HScore){
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra("score", String.valueOf(score));
+            replyIntent.putExtra("time", timer2048);
+            replyIntent.putExtra("game", game);
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        }
+        else{
+            setResult(RESULT_CANCELED);
+            finish();
+        }
     }
 }
