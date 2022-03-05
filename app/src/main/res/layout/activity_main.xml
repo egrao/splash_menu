@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@color/colorBG">
 
     <TableLayout
         android:id="@+id/TableLayout01"
@@ -35,7 +35,7 @@
             android:layout_weight="15"
             android:gravity="top|center"
             android:text="@string/app_logo_top"
-            android:textColor="@color/logo_color"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/logo_size"
             android:textStyle="bold"></TextView>
 </TableLayout>

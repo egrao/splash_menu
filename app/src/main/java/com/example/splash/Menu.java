@@ -49,7 +49,7 @@ public class Menu extends AppCompatActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text = (TextView) view.findViewById(android.R.id.text1);
-                text.setTextColor(Color.RED);
+                text.setTextColor(getResources().getColor(R.color.colorAccent));
                 text.setTextSize(25);
                 text.setTypeface(null, Typeface.BOLD);
                 return view;
@@ -64,7 +64,6 @@ public class Menu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if(position == 0){
                     showItem1(arg1, gamePeg.class);
-
                 }
 
                 if(position == 1){
@@ -75,9 +74,9 @@ public class Menu extends AppCompatActivity {
                     showItem3(arg1, scoreboard.class);
                 }
 
-//                if(position == 3){
-//                    showItem2(arg1, game2048.class);
-//                }
+                if(position == 3){
+                    showItem4(arg1, Settings.class);
+                }
 
             }
         });
@@ -96,6 +95,12 @@ public class Menu extends AppCompatActivity {
     }
 
     public void showItem3(View view, Class clase) {
+        Intent intent = new Intent(this, clase);
+        intent.putExtra(MyOpenHelper.KEY_USER, user);
+        startActivity(intent);
+    }
+
+    public void showItem4(View view, Class clase) {
         Intent intent = new Intent(this, clase);
         intent.putExtra(MyOpenHelper.KEY_USER, user);
         startActivity(intent);

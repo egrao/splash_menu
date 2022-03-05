@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFF0F</color>
-    <color name="colorBG">#FF000000</color>
-    <color name="colorAccent">#F81616</color>
+    <color name="colorPrimary">#FB8E2E</color>
+    <color name="colorBG">#FFFFFFFF</color>
+    <color name="colorAccent">#2EFB49</color>
+    <color name="score_color">#FF000000</color>
     <color name="version_color">#f0f0f0</color>
-    <color name="score_color">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple_200">#AE87BF</color>

@@ -16,16 +16,17 @@
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_game2048.xml" value="0.14" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_game_peg.xml" value="0.18" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_leaderboard.xml" value="0.153125" />
-        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_login.xml" value="0.19270833333333334" />
+        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_menu.xml" value="0.14" />
-        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_scoreboard.xml" value="0.16" />
+        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_scoreboard.xml" value="0.1" />
+        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/customtext.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/listviewtext.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/mytextview.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/pene.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/recycler_item.xml" value="0.1" />
+        <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/layout/recycler_item.xml" value="0.25" />
         <entry key="..\:/Users/DAM/AndroidStudioProjects/splash/app/src/main/res/mipmap-anydpi-v26/splash1.xml" value="0.2203125" />
         <entry key="..\:/Users/DAM/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.153125" />
       </map>

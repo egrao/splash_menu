@@ -7,7 +7,7 @@
     tools:context=".Splash">
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/listviewSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -15,12 +15,12 @@
         android:dividerHeight="1pt"></ListView>
 
     <ImageView
-        android:id="@+id/img2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/menu_fondo_top"
-        android:layout_marginLeft="@dimen/menu_fondo_left"
+        android:id="@+id/imgSettings"
+        android:layout_width="match_parent"
+        android:layout_height="355dp"
+        android:layout_marginTop="@dimen/settings_fondo_top"
         android:contentDescription="@string/description"
-        android:src="@drawable/dkfondo" />
+        android:adjustViewBounds="true"
+        android:src="@drawable/lab" />
 
 </RelativeLayout>

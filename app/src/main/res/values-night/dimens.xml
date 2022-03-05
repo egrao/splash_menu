@@ -10,7 +10,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="button_peg">50dp</dimen>
-    <dimen name="menu_fondo_top">120dp</dimen>
-    <dimen name="menu_fondo_left">0dp</dimen>
+    <dimen name="menu_fondo_top">180dp</dimen>ç
+    <dimen name="menu_fondo_left">25dp</dimen>
     <dimen name="settings_fondo_top">200dp</dimen>
 </resources>

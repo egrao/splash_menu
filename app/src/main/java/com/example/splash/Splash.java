@@ -53,6 +53,7 @@ public class Splash extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
 //                startActivity(new Intent(Splash.this,Menu.class));
                 startActivity(new Intent(Splash.this,login.class));
+                audio.stop();
                 Splash.this.finish();
             }
 
