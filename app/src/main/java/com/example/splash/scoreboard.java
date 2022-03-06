@@ -82,7 +82,7 @@ public class scoreboard extends AppCompatActivity {
 
             for (int i = 0; i < scoresList.length; i++) {
                 mScoresData.add(new score(scoresList[i], scoresInfo[i],
-                        R.drawable.img_basketball));
+                        R.drawable.solitaire));
             }
         }
         else{
@@ -91,7 +91,7 @@ public class scoreboard extends AppCompatActivity {
 
             for (int i = 0; i < scoresList.length; i++) {
                 mScoresData2.add(new score(scoresList[i], scoresInfo[i],
-                        R.drawable.img_baseball));
+                        R.drawable.score2048_bg));
             }
         }
 

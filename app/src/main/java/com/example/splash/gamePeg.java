@@ -236,6 +236,7 @@ public class gamePeg extends AppCompatActivity {
     }
 
     public boolean checkWin(){
+        win = false;
         int cont = 0;
         int fila = 0;
         int columna = 0;

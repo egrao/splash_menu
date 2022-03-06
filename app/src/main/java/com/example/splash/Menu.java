@@ -131,48 +131,26 @@ public class Menu extends AppCompatActivity {
 //                }
             }
             else if (resultCode == RESULT_CANCELED){
-                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(2048, "20:20", "game2048", user);
                 mDB.insertHScore(2, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(5, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(80, "20:20", "game2048", user);
+                mDB.insertHScore(349, "20:20", "game2048", user);
                 mDB.insertHScore(20, "20:20", "game2048", user);
                 mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(49, "20:20", "game2048", user);
+                mDB.insertHScore(420, "20:20", "game2048", user);
+                mDB.insertHScore(9, "20:20", "game2048", user);
+                mDB.insertHScore(777, "20:20", "game2048", user);
                 mDB.insertHScore(1, "20:20", "game2048", user);
                 mDB.insertHScore(69, "20:20", "game2048", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(800, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(900, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(320, "40:40", "gamePeg", user);
+                mDB.insertHScore(40, "40:40", "gamePeg", user);
+                mDB.insertHScore(10, "40:40", "gamePeg", user);
+                mDB.insertHScore(48, "40:40", "gamePeg", user);
                 mDB.insertHScore(2, "40:40", "gamePeg", user);
+                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(23, "40:40", "gamePeg", user);
+
 
 
 

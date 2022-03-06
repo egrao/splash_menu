@@ -24,6 +24,7 @@
             android:padding="8dp"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
+            android:textSize="35sp"
             android:layout_alignBottom="@id/gameImage"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:text="Score: " />
@@ -36,6 +37,7 @@
             android:layout_below="@id/gameImage"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:padding="8dp"
             android:text="timer: " />
 
