@@ -3,7 +3,9 @@ package com.example.splash;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -507,9 +509,18 @@ public class gamePeg extends AppCompatActivity {
             else{
                 score = Integer.parseInt(scoreHolder.getText().toString());
                 timerPeg = mChronometer.getText().toString();
+                MediaPlayer audio = MediaPlayer.create(gamePeg.this, R.raw.chimp_screech2);
+                audio.start();
                 Toast.makeText(gamePeg.this, "Game Over bois", Toast.LENGTH_SHORT).show();
                 System.out.println("Game Over bois pack it up");
-                returnReply();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        audio.stop();
+                        returnReply();
+                    }
+                }, 1000);
+
             }
         }
     }

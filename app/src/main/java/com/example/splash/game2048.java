@@ -2,7 +2,9 @@ package com.example.splash;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -247,8 +249,16 @@ public class game2048 extends AppCompatActivity {
         if (gameOver == true) {
             score = Integer.parseInt(scoreHolder.getText().toString());
             timer2048 = mChronometer.getText().toString();
+            MediaPlayer audio = MediaPlayer.create(game2048.this, R.raw.chimp_screech2);
+            audio.start();
             Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
-            returnReply();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    audio.stop();
+                    returnReply();
+                }
+            }, 1000);
         }
 
     }

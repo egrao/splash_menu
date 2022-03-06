@@ -76,18 +76,19 @@ public class Settings extends AppCompatActivity {
                 }
 
                 if(position == 2){
-                    MediaPlayer audio = MediaPlayer.create(Settings.this, R.raw.ok_audio);
+                    MediaPlayer audio = MediaPlayer.create(Settings.this, R.raw.ok_audio2);
                     audio.start();
                     Intent intent = new Intent(Settings.this, login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
+                            Toast.makeText(Settings.this, "Logged out", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                             audio.stop();
                         }
-                    }, 2200);
-                    Toast.makeText(Settings.this, "Logged out", Toast.LENGTH_SHORT).show();
+                    }, 1000);
+
 
                 }
 
