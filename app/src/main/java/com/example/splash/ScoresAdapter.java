@@ -84,8 +84,8 @@ class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder>  {
             {
 
         // Member Variables for the TextViews
-        private TextView mTitleText;
-        private TextView mInfoText;
+        private TextView mScoreText;
+        private TextView mTimeText;
         private ImageView mSportsImage;
 
         /**
@@ -97,8 +97,8 @@ class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder>  {
             super(itemView);
 
             // Initialize the views.
-            mTitleText = itemView.findViewById(R.id.score);
-            mInfoText = itemView.findViewById(R.id.time);
+            mScoreText = itemView.findViewById(R.id.score);
+            mTimeText = itemView.findViewById(R.id.time);
             mSportsImage = itemView.findViewById(R.id.gameImage);
 
             // Set the OnClickListener to the entire view.
@@ -107,8 +107,8 @@ class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder>  {
 
         void bindTo(score currentScore){
             // Populate the textviews with data.
-            mTitleText.setText(currentScore.getTitle());
-            mInfoText.setText(currentScore.getInfo());
+            mScoreText.setText(currentScore.getScore());
+            mTimeText.setText(currentScore.getTime());
 
             // Load the images into the ImageView using the Glide library.
             Glide.with(mContext).load(

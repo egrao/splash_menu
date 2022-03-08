@@ -69,7 +69,7 @@ public class scoreboard extends AppCompatActivity {
     private void initializeData(String game) {
         // Get the resources from the XML file.
         String[] scoresList = getList(game, "_score");
-        String[] scoresInfo = getList(game, "time");
+        String[] timeList = getList(game, "time");
 //        TypedArray scoresImageResources =
 //                getResources().obtainTypedArray(R.array.sports_images);
 
@@ -81,7 +81,7 @@ public class scoreboard extends AppCompatActivity {
             mScoresData.clear();
 
             for (int i = 0; i < scoresList.length; i++) {
-                mScoresData.add(new score(scoresList[i], scoresInfo[i],
+                mScoresData.add(new score(scoresList[i], timeList[i],
                         R.drawable.solitaire));
             }
         }
@@ -90,7 +90,7 @@ public class scoreboard extends AppCompatActivity {
             mScoresData2.clear();
 
             for (int i = 0; i < scoresList.length; i++) {
-                mScoresData2.add(new score(scoresList[i], scoresInfo[i],
+                mScoresData2.add(new score(scoresList[i], timeList[i],
                         R.drawable.score2048_bg));
             }
         }

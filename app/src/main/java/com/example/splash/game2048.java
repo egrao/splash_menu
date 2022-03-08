@@ -58,6 +58,7 @@ public class game2048 extends AppCompatActivity {
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
         scoreHolder = (TextView) findViewById(R.id.score2048);
         bestScoreHolder = (TextView) findViewById(R.id.best_score2048);
+        bestScoreHolder.setText(String.valueOf(HScore));
         score = 0;
         gameOver = false;
         win = false;

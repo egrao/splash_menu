@@ -64,61 +64,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 //        fillDatabaseWithData(db);
     }
 
-    //    public void fillDatabaseWithData(SQLiteDatabase db) {
-//
-//        String[] words = {"Android", "Adapter", "ListView", "AsyncTask", "Android Studio",
-//                "SQLiteDatabase", "SQLOpenHelper", "Data model", "ViewHolder",
-//                "Android Performance", "OnClickListener"};
-//
-//        // Create a container for the data.
-//        ContentValues values = new ContentValues();
-//
-//        for (int i=0; i < words.length; i++) {
-//            // Put column/value pairs for current row into the container.
-//            values.put(KEY_WORD, words[i]); // put() overrides existing values.
-//            // Insert the row.
-//            db.insert(REGISTERED_USERS_TABLE, null, values);
-//        }
-//    }
-
-
-
-
-    //    public WordItem query(int position) {
-//        String query = "SELECT  * FROM " + REGISTERED_USERS_TABLE +
-//                " ORDER BY " + KEY_WORD + " ASC " +
-//                "LIMIT " + position + ",1";
-//
-//        Cursor cursor = null;
-//        WordItem entry = new WordItem();
-//
-//        try {
-//            if (mReadableDB == null) {
-//                mReadableDB = getReadableDatabase();
-//            }
-//            cursor = mReadableDB.rawQuery(query, null);
-//            cursor.moveToFirst();
-//            entry.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
-//            entry.setWord(cursor.getString(cursor.getColumnIndex(KEY_WORD)));
-//        } catch (Exception e) {
-//            Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
-//        } finally {
-//            // Must close cursor and db now that we are done with it.
-//            cursor.close();
-//            return entry;
-//        }
-//    }
-
-    //    public long count() {
-//        if (mReadableDB == null) {
-//            mReadableDB = getReadableDatabase();
-//        }
-//        return DatabaseUtils.queryNumEntries(mReadableDB, REGISTERED_USERS_TABLE);
-//    }
-
-
-    //      Adds a single word row/entry to the database.
-//
 //      @param  user New word.
 //      @return The id of the inserted word.
 //
@@ -126,10 +71,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_USER, user);
         values.put(KEY_PASS, pass);
-//        values.put(KEY_HSCOREPEG, hscorepeg);
-//        values.put(KEY_PEGTIMER, pegtimer);
-//        values.put(KEY_HSCORE2048, hscore2048);
-//        values.put(KEY_2048TIMER, timer2048);
+
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
@@ -165,7 +107,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
      * @return the number of rows affected or -1 of nothing was updated.
      */
     public void update(int id, String user, String pass) {
-//        int mNumberOfRowsUpdated = -1;
+
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
@@ -173,10 +115,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_USER, user);
             values.put(KEY_PASS, pass);
-//            values.put(KEY_HSCOREPEG, hscorepeg);
-//            values.put(KEY_PEGTIMER, pegtimer);
-//            values.put(KEY_HSCORE2048, hscore2048);
-//            values.put(KEY_2048TIMER, timer2048);
 
             mWritableDB.update(REGISTERED_USERS_TABLE, //table to change
                     values, // new values to insert
@@ -200,19 +138,15 @@ public class MyOpenHelper extends SQLiteOpenHelper {
      * @param id ID of the entry to delete.
      * @return The number of rows deleted. Since we are deleting by id, this should be 0 or 1.
      */
-    public void delete(int id) {
-//        int deleted = 0;
+    public void delete(String user) {
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
             }
             mWritableDB.delete(REGISTERED_USERS_TABLE, //table name
-                    KEY_ID + " =? ", new String[]{String.valueOf(id)});
-//            deleted = mWritableDB.delete(REGISTERED_USERS_TABLE, //table name
-//                    KEY_ID + " =? ", new String[]{String.valueOf(id)});
+                    KEY_USER + " =? ", new String[]{user});
         } catch (Exception e) {
             Log.d (TAG, "DELETE EXCEPTION! " + e);        }
-//        return deleted;
     }
 
     public Boolean search(String searchString, String attribute) {

@@ -1,8 +1,10 @@
 package com.example.splash;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -36,7 +38,8 @@ public class Settings extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.listviewSettings);
         menuItems = new ArrayList<String>();
-        menuItems.add("EDIT/ETC");
+        String deleteUser = "Delete: "+user;
+        menuItems.add(deleteUser);
         menuItems.add("Change theme");
         menuItems.add("Log out");
 
@@ -59,7 +62,21 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if(position == 0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder (Settings.this);
+                    builder.setMessage("¿Seguro que desea borrar este usuario y todos sus datos?");
+                    builder.setTitle(deleteUser);
+                    builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            mDB.delete(user);
+                            Toast.makeText(Settings.this, "Usuario "+user+" eliminado", Toast.LENGTH_SHORT).show();
+                            logOut();
+                        }
+                    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
 
+                                }
+                            });
+                    builder.create().show();
                 }
 
                 if(position == 1){
@@ -76,24 +93,27 @@ public class Settings extends AppCompatActivity {
                 }
 
                 if(position == 2){
-                    MediaPlayer audio = MediaPlayer.create(Settings.this, R.raw.ok_audio2);
-                    audio.start();
-                    Intent intent = new Intent(Settings.this, login.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            Toast.makeText(Settings.this, "Logged out", Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                            audio.stop();
-                        }
-                    }, 1000);
-
-
+                    logOut();
                 }
 
             }
         });
+
+    }
+
+    public void logOut(){
+        MediaPlayer audio = MediaPlayer.create(Settings.this, R.raw.ok_audio2);
+        audio.start();
+        Intent intent = new Intent(Settings.this, login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Toast.makeText(Settings.this, "Logged out", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                audio.stop();
+            }
+        }, 1000);
 
     }
 }

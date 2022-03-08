@@ -2,39 +2,39 @@ package com.example.splash;
 
 class score {
 
-    // Member variables representing the title and information about the sport.
-    private String title;
-    private String info;
+    // Member variables representing the score and timermation about the sport.
+    private String score;
+    private String time;
     private final int imageResource;
 
     /**
      * Constructor for the Sport data model.
      *
-     * @param title The name if the sport.
-     * @param info Information about the sport.
+     * @param score The name if the sport.
+     * @param time timermation about the sport.
      */
-    public score(String title, String info, int imageResource) {
-        this.title = title;
-        this.info = info;
+    public score(String score, String time, int imageResource) {
+        this.score = score;
+        this.time = time;
         this.imageResource = imageResource;
     }
 
     /**
-     * Gets the title of the sport.
+     * Gets the score of the sport.
      *
-     * @return The title of the sport.
+     * @return The score of the sport.
      */
-    String getTitle() {
-        return title;
+    String getScore() {
+        return score;
     }
 
     /**
-     * Gets the info about the sport.
+     * Gets the time about the sport.
      *
-     * @return The info about the sport.
+     * @return The time about the sport.
      */
-    String getInfo() {
-        return info;
+    String getTime() {
+        return time;
     }
 
     public int getImageResource() {
