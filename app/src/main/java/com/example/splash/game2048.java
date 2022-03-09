@@ -48,6 +48,7 @@ public class game2048 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_game2048);
 /////////////////////COSAS/////////////////
         Bundle extras = getIntent().getExtras();
@@ -60,6 +61,7 @@ public class game2048 extends AppCompatActivity {
         bestScoreHolder = (TextView) findViewById(R.id.best_score2048);
         bestScoreHolder.setText(String.valueOf(HScore));
         score = 0;
+        copiedScore = 0;
         gameOver = false;
         win = false;
 
@@ -81,7 +83,6 @@ public class game2048 extends AppCompatActivity {
         if (this.mDetector.onTouchEvent(event)) {
             return true;
         }
-//        mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
 
@@ -103,21 +104,17 @@ public class game2048 extends AppCompatActivity {
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
-//                            Toast.makeText(game2048.this, "RIGHT", Toast.LENGTH_SHORT).show();
                             flingRight();
                         } else {
                             flingLeft();
-//                            Toast.makeText(game2048.this, "LEFT", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {
                     if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffY > 0) {
                             flingDown();
-//                            Toast.makeText(game2048.this, "DOWN", Toast.LENGTH_SHORT).show();
                         } else {
                             flingUp();
-//                            Toast.makeText(game2048.this, "UP", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -153,15 +150,6 @@ public class game2048 extends AppCompatActivity {
         return newBoard;
     }
 
-//    public Button [][] copyBoard2( Button[][] originalBoard){
-//        Button [][] newBoard = new Button [cells.length][cells.length];
-//        for (int i = 0; i<cells.length; i++){
-//            for(int j=0; j<cells.length; j++){
-//                newBoard[i][j] = originalBoard[i][j];
-//            }
-//        }
-//        return newBoard;
-//    }
 
     public void repaintBoard( String[][] board ){
         for (int i = 0; i<cells.length; i++){
@@ -194,7 +182,6 @@ public class game2048 extends AppCompatActivity {
 
     public void checkGameOver(){
         emptyCells = checkEmptyCells();
-        System.out.println("gameover empty"+emptyCells);
         gameOver = true;
 
         if(emptyCells == false){
@@ -252,7 +239,7 @@ public class game2048 extends AppCompatActivity {
             timer2048 = mChronometer.getText().toString();
             MediaPlayer audio = MediaPlayer.create(game2048.this, R.raw.chimp_screech2);
             audio.start();
-            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
+            Toast.makeText(game2048.this, "GAME OVER", Toast.LENGTH_SHORT).show();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
@@ -314,10 +301,6 @@ public class game2048 extends AppCompatActivity {
         newCell(cells);
         checkGameOver();
         checkWin();
-//        checkGameOver();
-//        if (gameOver) {
-//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     public void flingLeft(){
@@ -332,9 +315,6 @@ public class game2048 extends AppCompatActivity {
         newCell(cells);
         checkGameOver();
         checkWin();
-//        if (gameOver) {
-//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     public void flingUp(){
@@ -349,9 +329,6 @@ public class game2048 extends AppCompatActivity {
         newCell(cells);
         checkGameOver();
         checkWin();
-//        if (gameOver) {
-//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     public void flingDown(){
@@ -366,32 +343,10 @@ public class game2048 extends AppCompatActivity {
         newCell(cells);
         checkGameOver();
         checkWin();
-//        if (gameOver) {
-//            Toast.makeText(game2048.this, "IS OVER", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     public void addRight(int row, Button[][] cells){
-//        int index = row * 4;
-//        Button button1 = (Button) grid.getChildAt(index);
-//        Button button2 = (Button) grid.getChildAt(index+1);
-//        Button button3 = (Button) grid.getChildAt(index+2);
-//        Button button4 = (Button) grid.getChildAt(index+3);
-//
-//
-//        if (button1.getText() == button2.getText() && button1.getText() == button3.getText() && button1.getText() == button4.getText()) {
-//            int original = Integer.parseInt(String.valueOf(button1.getText()));
-//            int result = original * 4;
-//            button1.setText("");
-//            button2.setText("");
-//            button3.setText("");
-//            button4.setText(String.valueOf(result));
-//        }
         for(int i=3; i>0; i--) {
-            //botón de la dcha
-//            Button buttonDcha = (Button) grid.getChildAt(i); //3
-//            //botón de la izq
-//            Button buttonIzq = (Button) grid.getChildAt(i-1); //2
             if (cells[row][i].getText().equals(cells[row][i-1].getText())) {
 
                 if ((cells[row][i].getText()).equals("") || (cells[row][i-1].getText().equals(""))) {
@@ -406,25 +361,12 @@ public class game2048 extends AppCompatActivity {
                 }
             }
         }
-//        Button buttonDcha = (Button) grid.getChildAt(2);
-//        Button buttonIzq = (Button) grid.getChildAt(1); //2
-//        if (buttonDcha.getText().equals("") && !(buttonIzq.getText().equals(""))){
-//            Toast.makeText(game2048.this, "FUNKA", Toast.LENGTH_SHORT).show();
-////                buttonDcha.setText("pene");
-//            buttonDcha.setText(buttonIzq.getText()); //3
-//            buttonIzq.setText(""); //2
-//        }
-///////////////////////////////////////7
     }
 
     public void checkRight(int row, Button[][] cells){
 //        int index = row * 4;
         for (int i = 0; i < 4; i++) {
             for (int j=3; j > 0; j--) {
-                //botón de la dcha
-//                Button buttonDcha = (Button) grid.getChildAt(j); //3
-//                //botón de la izq
-//                Button buttonIzq = (Button) grid.getChildAt(j-1); //2
                 if (cells[row][j].getText().equals("") && !(cells[row][j-1].getText().equals(""))) {
                     cells[row][j].setText(cells[row][j-1].getText()); //3
                     cells[row][j-1].setText(""); //2
@@ -577,7 +519,6 @@ public class game2048 extends AppCompatActivity {
     }
 
     public void restartButton2048(View view) {
-//        copyBoard(initialMatrix, copiedMatrix);
         score = 0;
         win = false;
         gameOver = false;

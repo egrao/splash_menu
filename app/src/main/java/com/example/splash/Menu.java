@@ -1,6 +1,7 @@
 package com.example.splash;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_menu);
 
         Bundle extras = getIntent().getExtras();
@@ -141,24 +143,16 @@ public class Menu extends AppCompatActivity {
                 mDB.insertHScore(420, "20:20", "game2048", user);
                 mDB.insertHScore(9, "20:20", "game2048", user);
                 mDB.insertHScore(777, "20:20", "game2048", user);
-                mDB.insertHScore(1, "20:20", "game2048", user);
+                mDB.insertHScore(33, "20:20", "game2048", user);
                 mDB.insertHScore(69, "20:20", "game2048", user);
                 mDB.insertHScore(320, "40:40", "gamePeg", user);
                 mDB.insertHScore(40, "40:40", "gamePeg", user);
                 mDB.insertHScore(10, "40:40", "gamePeg", user);
                 mDB.insertHScore(48, "40:40", "gamePeg", user);
                 mDB.insertHScore(2, "40:40", "gamePeg", user);
-                mDB.insertHScore(3, "40:40", "gamePeg", user);
+                mDB.insertHScore(21, "40:40", "gamePeg", user);
                 mDB.insertHScore(23, "40:40", "gamePeg", user);
 
-
-
-
-
-                Toast.makeText(
-                        getApplicationContext(),
-                        "no hay hscore nuevo",
-                        Toast.LENGTH_LONG).show();
             }
         }
     }

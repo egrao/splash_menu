@@ -3,6 +3,7 @@ package com.example.splash;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,15 +25,16 @@ public class login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
         //////COSAS////////
 
         mDB = new MyOpenHelper(this);
         mEditUserView = (EditText) findViewById(R.id.login_username);
         mEditPassView = (EditText) findViewById(R.id.login_pass);
-//        boton para añadir, seria el register que te manda a la ventana para nuevo usuario
-        Button fab = (Button) findViewById(R.id.button_register);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        Button registerButton = (Button) findViewById(R.id.button_register);
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Starts empty edit activity.
@@ -52,15 +54,8 @@ public class login extends AppCompatActivity {
 
                 // Update the database.
                 if (!TextUtils.isEmpty(user) && !TextUtils.isEmpty(pass)) {
-//                    int id = data.getIntExtra(WordListAdapter.EXTRA_ID, -99);
 
-//                    if (id == WORD_ADD) {
                         mDB.insert(user, pass);
-//                    } else if (id >= 0) {
-//                        mDB.update(id, word);
-//                    }
-                    // Update the UI.
-//                    mAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(
                             getApplicationContext(),
@@ -68,17 +63,6 @@ public class login extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
             }
-//            hacer otro if para result cancelled cuando el search dice que ya se ha encontrado el user si
-//                    quiero controlarlo desde esta actividad, si no pues hacerlo en el propio act de register
-//            String [] aux = mDB.getUser();
-//            TextView aux1 = (TextView) findViewById(R.id.uno);
-//            TextView aux2 = (TextView) findViewById(R.id.dos);
-//            aux1.setText(aux[0]);
-//            aux2.setText(aux[1]);
-//            Boolean aux9 = mDB.search("pepe");
-//            if (aux9 == true){
-//                Toast.makeText(login.this, "WORKING AS INTEnDED", Toast.LENGTH_SHORT).show();
-//            }
         }
     }
 
@@ -116,15 +100,10 @@ public class login extends AppCompatActivity {
 
         String auxUser = c.getString(c.getColumnIndexOrThrow(MyOpenHelper.KEY_USER));
         String auxPass = c.getString(c.getColumnIndexOrThrow(MyOpenHelper.KEY_PASS));
-        System.out.println("liturgia "+auxUser);
-        System.out.println("liturgia "+auxPass);
-        System.out.println("liturgia editv user "+ user);
-        System.out.println("liturgia editv pass "+ password);
 
         if(auxUser.equals(user) && auxPass.equals(password)){
-            System.out.println("liturgia pene");
+
             c.close();
-//            mDB.getWritableDatabase().execSQL("DELETE FROM users");
             return true;
         }
         c.close();

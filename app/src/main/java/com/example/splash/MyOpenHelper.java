@@ -44,7 +44,8 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     private static final String SCORES_TABLE_CREATE =
             "CREATE TABLE " + SCORES_TABLE + " (" +
-                    KEY_SCORE + " INTEGER, " + KEY_TIME + " TEXT, " + KEY_GAME + " TEXT, " + KEY_USER + " TEXT );";
+                    KEY_SCORE + " INTEGER, " + KEY_TIME + " TEXT, " + KEY_GAME + " TEXT, " +
+                    KEY_USER + " TEXT, " + "FOREIGN KEY(" + KEY_USER + ") REFERENCES users(user) ON DELETE CASCADE);";
 
 
     private SQLiteDatabase mWritableDB;
@@ -61,12 +62,19 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.execSQL(REGISTERED_USERS_TABLE_CREATE);
         db.execSQL(SCORES_TABLE_CREATE);
 //        mWritableDB.execSQL("DELETE FROM users");
-//        fillDatabaseWithData(db);
+//        mWritableDB.execSQL("DELETE FROM scores");
     }
 
-//      @param  user New word.
-//      @return The id of the inserted word.
-//
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+    }
+
+
     public void insert(String user, String pass) {
         ContentValues values = new ContentValues();
         values.put(KEY_USER, user);
@@ -99,45 +107,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Updates the word with the supplied id to the supplied value.
-     *
-     * @param id Id of the word to update.
-     * @param user The new value of the word.
-     * @return the number of rows affected or -1 of nothing was updated.
-     */
-    public void update(int id, String user, String pass) {
 
-        try {
-            if (mWritableDB == null) {
-                mWritableDB = getWritableDatabase();
-            }
-            ContentValues values = new ContentValues();
-            values.put(KEY_USER, user);
-            values.put(KEY_PASS, pass);
-
-            mWritableDB.update(REGISTERED_USERS_TABLE, //table to change
-                    values, // new values to insert
-                    KEY_ID + " = ?", // selection criteria for row (in this case, the _id column)
-                    new String[]{String.valueOf(id)}); //selection args; the actual value of the id
-
-//            mNumberOfRowsUpdated = mWritableDB.update(REGISTERED_USERS_TABLE, //table to change
-//                    values, // new values to insert
-//                    KEY_ID + " = ?", // selection criteria for row (in this case, the _id column)
-//                    new String[]{String.valueOf(id)}); //selection args; the actual value of the id
-
-        } catch (Exception e) {
-            Log.d (TAG, "UPDATE EXCEPTION! " + e);
-        }
-//        return mNumberOfRowsUpdated;
-    }
-
-    /**
-     * Deletes one entry identified by its id.
-     *
-     * @param id ID of the entry to delete.
-     * @return The number of rows deleted. Since we are deleting by id, this should be 0 or 1.
-     */
     public void delete(String user) {
         try {
             if (mWritableDB == null) {
@@ -148,6 +118,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d (TAG, "DELETE EXCEPTION! " + e);        }
     }
+
 
     public Boolean search(String searchString, String attribute) {
         Boolean exists = false;
@@ -186,23 +157,9 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             }
 
             String[] params = new String[]{user};
-//            c = mReadableDB.rawQuery("SELECT * FROM users WHERE user = ?", params);
+
             c = mReadableDB.rawQuery(query, params);
-//        String[] strings = new String[2];
-//            if (c != null && c.getCount() > 0) {
-////                c.moveToFirst();
-////                do {
-////                    System.out.println("liturgia count "+String.valueOf(c.getCount()));
-////                    String user = c.getString(c.getColumnIndexOrThrow("user"));
-////                    String pass = c.getString(c.getColumnIndexOrThrow("pass"));
-////                    System.out.println("liturgia user"+user);
-////                    System.out.println("liturgia user"+pass);
-////                    strings[0] = user;
-////                    strings[1] = pass;
-////                } while (c.moveToNext());
-//            }
-//            mWritableDB.execSQL("DELETE FROM users");
-//            c.close();
+
         } catch (Exception e) {
             Log.d(TAG, "QUERY EXCEPTION! " + e); // Just log the exception
         }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -30,6 +31,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_settings);
 
         Bundle extras = getIntent().getExtras();
@@ -38,7 +40,7 @@ public class Settings extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.listviewSettings);
         menuItems = new ArrayList<String>();
-        String deleteUser = "Delete: "+user;
+        String deleteUser = "Delete user: "+user;
         menuItems.add(deleteUser);
         menuItems.add("Change theme");
         menuItems.add("Log out");

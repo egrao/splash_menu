@@ -116,19 +116,5 @@ class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder>  {
 
         }
 
-        /**
-         * Handle click to show DetailActivity.
-         *
-         * @param view View that is clicked.
-         */
-//        @Override
-//        public void onClick(View view) {
-//            Sport currentScore = mScoresData.get(getAdapterPosition());
-//            Intent detailIntent = new Intent(mContext, DetailActivity.class);
-//            detailIntent.putExtra("title", currentScore.getTitle());
-//            detailIntent.putExtra("image_resource",
-//                    currentScore.getImageResource());
-//            mContext.startActivity(detailIntent);
-//        }
     }
 }

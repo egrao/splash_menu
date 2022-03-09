@@ -21,8 +21,9 @@
         android:layout_height="100dp"
         android:layout_marginLeft="250dp"
         android:layout_marginTop="-30dp"
-        android:background="#b6a5a5"
-        android:orientation="vertical">
+        android:background="@drawable/bg_grid"
+        android:orientation="vertical"
+        >
 
         <Chronometer
             android:id="@+id/chronometer"
@@ -32,10 +33,11 @@
             android:gravity="center_vertical"
             android:textSize="20dp"
             tools:ignore="RtlCompat" />
+
         <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:background="#b6a5a5"
+        android:background="@drawable/bg_grid"
         android:orientation="horizontal">
 
         <TextView
@@ -44,6 +46,8 @@
             android:layout_height="match_parent"
             android:text="0"
             android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:gravity="center_vertical"
             android:textAlignment="center"
             tools:ignore="RtlCompat" />
@@ -53,6 +57,8 @@
             android:layout_height="match_parent"
             android:text="0"
             android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:gravity="center_vertical"
             android:textAlignment="center"
             tools:ignore="RtlCompat" />
@@ -62,21 +68,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
-        android:background="#b6a5a5"
+        android:layout_marginLeft="285dp"
         android:orientation="horizontal">
 
         <Button
             android:layout_width="@dimen/cell"
             android:layout_height="@dimen/cell"
-            android:background="#b6a5a5"
             android:onClick="undoButton2048"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="#b6a5a5"
             android:text="U"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button
             android:layout_width="@dimen/cell"
             android:layout_height="@dimen/cell"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:background="#b6a5a5"
             android:onClick="restartButton2048"
             android:text="R"
