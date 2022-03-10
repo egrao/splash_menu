@@ -1,6 +1,7 @@
 package com.example.splash;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -257,7 +258,6 @@ public class game2048 extends AppCompatActivity {
             timer2048 = mChronometer.getText().toString();
             Toast.makeText(game2048.this, "WIN WIN WIN WIN", Toast.LENGTH_SHORT).show();
             returnReply();
-
         }
     }
 
